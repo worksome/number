@@ -16,7 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "brick/math": "^0.9.3"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.10",
