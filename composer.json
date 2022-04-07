@@ -1,0 +1,62 @@
+{
+    "name": "worksome/number",
+    "description": "This is my package number",
+    "keywords": [
+        "worksome",
+        "laravel",
+        "number"
+    ],
+    "homepage": "https://github.com/worksome/number",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Owen Voke",
+            "email": "owen.voke@worksome.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^5.10",
+        "nunomaduro/larastan": "^1.0 || ^2.0",
+        "orchestra/testbench": "^6.22",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-parallel": "^1.0",
+        "worksome/pest-plugin-silence": "^0.1",
+        "worksome/coding-style": "0.14.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Worksome\\Number\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Worksome\\Number\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcbf",
+        "test:unit": "vendor/bin/pest -p",
+        "test:coverage": "vendor/bin/pest -p --coverage",
+        "test:types": "vendor/bin/phpstan analyse",
+        "test:style": "vendor/bin/phpcs -n",
+        "test": [
+            "@test:style",
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "worksome/coding-style": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
