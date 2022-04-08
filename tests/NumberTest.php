@@ -117,3 +117,23 @@ it('can negate numbers', function (string|int|float $number, string|int|float $r
     'floats as strings' => ['0.002', '-0.002'],
     'floats' => [0.002, -0.002],
 ]);
+
+it('can get underlying value as string', function (string $number, string $result) {
+    expect(Number::of($number)->toString())->toEqual($result);
+})->with([
+    'integers as strings' => ['10', '10'],
+    'integers' => [2, 2],
+    'floats as strings' => ['0.002', '0.002'],
+    'floats' => [0.002, 0.002],
+    'large floats as strings' => ['1000000001.1000000001', '1000000001.1000000001'],
+]);
+
+it('can get underlying value as float', function (string $number, float $result) {
+    expect(Number::of($number)->toFloat())->toEqual($result);
+})->with([
+    'integers as strings' => ['10', 10],
+    'integers' => [2, 2],
+    'floats as strings' => ['0.002', 0.002],
+    'floats' => [0.002, 0.002],
+    'large floats as strings' => ['1000000001.1000000001', 1000000001.1000000001],
+]);
