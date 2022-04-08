@@ -81,6 +81,15 @@ class Number
         return static::of($this->value->dividedBy($value->value, null, $this->getRoundingMode()));
     }
 
+    public function percentage(int|Number $value): Number
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return static::of($this->value->exactlyDividedBy(100)->multipliedBy($value->value));
+    }
+
     public function negate(): Number
     {
         return static::of($this->value->negated());

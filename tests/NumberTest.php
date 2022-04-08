@@ -109,6 +109,25 @@ it('can multiply numbers', function (string|int|float $number, string|int|float|
     'floats as strings as Number' => ['0.001', Number::of('0.002'), '0.000002'],
 ]);
 
+it('can divide numbers', function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
+    expect(Number::of($number)->div($change)->getValue())->toEqual(BigDecimal::of($result));
+})->with([
+    'integers as strings as Number' => ['10', Number::of('2'), '5'],
+    'integers as strings' => ['10', '2', '5'],
+    'integers as Number' => [10, Number::of(2), 5],
+    'integers' => [10, 2, 5],
+    'floats as strings as Number' => ['10.02', Number::of('2'), '5.01'],
+]);
+
+it('can get percentage of numbers', function (string|int|float $number, int|Number $percentage, string|int|float $result) {
+    expect(Number::of($number)->percentage($percentage)->getValue())->toEqual(BigDecimal::of($result));
+})->with([
+    'integers as strings as Number' => ['500', Number::of('10'), '50'],
+    'integers as strings' => ['500', '10', '50'],
+    'integers as Number' => [500, Number::of(10), 50],
+    'integers' => [500, 10, 50],
+]);
+
 it('can negate numbers', function (string|int|float $number, string|int|float $result) {
     expect(Number::of($number)->negate()->getValue())->toEqual(BigDecimal::of($result));
 })->with([
