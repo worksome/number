@@ -137,3 +137,89 @@ it('can get underlying value as float', function (string $number, float $result)
     'floats' => [0.002, 0.002],
     'large floats as strings' => ['1000000001.1000000001', 1000000001.1000000001],
 ]);
+
+it('can check whether number is less than', function (int $number, int $lessThan, bool $result) {
+    expect(Number::of($number)->isLessThan($lessThan))->toBe($result);
+})->with([
+    '10 less than 15' => [10, 15, true],
+    '15 not less than 10' => [15, 10, false],
+]);
+
+it('can check whether number is less than or equal to', function (int $number, int $greaterThan, bool $result) {
+    expect(Number::of($number)->isLessThanOrEqualTo($greaterThan))->toBe($result);
+})->with([
+    '10 less than / equal to 15' => [10, 15, true],
+    '10 less than / equal to 10' => [10, 10, true],
+    '15 not less than / equal to 10' => [15, 10, false],
+]);
+
+it('can check whether number is greater than', function (int $number, int $greaterThan, bool $result) {
+    expect(Number::of($number)->isGreaterThan($greaterThan))->toBe($result);
+})->with([
+    '15 greater than 10' => [15, 10, true],
+    '10 not greater than 15' => [10, 15, false],
+]);
+
+it('can check whether number is greater than or equal to', function (int $number, int $greaterThan, bool $result) {
+    expect(Number::of($number)->isGreaterThanOrEqualTo($greaterThan))->toBe($result);
+})->with([
+    '15 greater than / equal to 10' => [15, 10, true],
+    '10 greater than / equal to 10' => [10, 10, true],
+    '10 not greater than / equal to 15' => [10, 15, false],
+]);
+
+it('can check whether number is equal to', function (int $number, int $greaterThan, bool $result) {
+    expect(Number::of($number)->isGreaterThanOrEqualTo($greaterThan))->toBe($result);
+})->with([
+    '15 equal to 10' => [10, 10, true],
+    '10 not equal to 15' => [10, 15, false],
+]);
+
+it('can check whether number is zero', function (int $number, bool $result) {
+    expect(Number::of($number)->isZero())->toBe($result);
+})->with([
+    '0 is zero' => [0, true],
+    '10 is not zero' => [10, false],
+    '1.0 is not zero' => [1.0, false],
+    '-1.0 is not zero' => [-1.0, false],
+]);
+
+it('can check whether number is negative', function (int $number, bool $result) {
+    expect(Number::of($number)->isNegative())->toBe($result);
+})->with([
+    '-1 is negative' => [-1, true],
+    '-10000 is negative' => [-10000, true],
+    '0 is not negative' => [0, false],
+    '1 is not negative' => [1, false],
+    '10000 is not negative' => [10000, false],
+]);
+
+it('can check whether number is negative or zero', function (int $number, bool $result) {
+    expect(Number::of($number)->isNegativeOrZero())->toBe($result);
+})->with([
+    '-1 is negative or zero' => [-1, true],
+    '-10000 is negative or zero' => [-10000, true],
+    '0 is not negative or zero' => [0, true],
+    '1 is not negative or zero' => [1, false],
+    '10000 is not negative or zero' => [10000, false],
+]);
+
+it('can check whether number is positive', function (int $number, bool $result) {
+    expect(Number::of($number)->isPositive())->toBe($result);
+})->with([
+    '1 is positive' => [1, true],
+    '10000 is positive' => [10000, true],
+    '0 is not positive' => [0, false],
+    '-1 is not positive' => [-1, false],
+    '-10000 is not positive' => [-10000, false],
+]);
+
+it('can check whether number is positive or zero', function (int $number, bool $result) {
+    expect(Number::of($number)->isPositiveOrZero())->toBe($result);
+})->with([
+    '1 is positive or zero' => [1, true],
+    '10000 is positive or zero' => [10000, true],
+    '0 is positive or zero' => [0, true],
+    '-1 is not positive or zero' => [-1, false],
+    '-10000 is not positive or zero' => [-10000, false],
+]);

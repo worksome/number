@@ -42,7 +42,7 @@ class Number
             return new self($value->getValue(), $roundingMode);
         }
 
-        return new self(BigDecimal::of($value)->toBigDecimal(), $roundingMode);
+        return new self(BigDecimal::of($value), $roundingMode);
     }
 
     public function add(string|int|float|BigNumber|Number $value): Number
@@ -84,6 +84,76 @@ class Number
     public function negate(): Number
     {
         return static::of($this->value->negated());
+    }
+
+    public function isLessThan(string|int|float|BigNumber|Number $value): bool
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return $this->value->isLessThan($value->getValue());
+    }
+
+    public function isLessThanOrEqualTo(string|int|float|BigNumber|Number $value): bool
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return $this->value->isLessThanOrEqualTo($value->getValue());
+    }
+
+    public function isGreaterThan(string|int|float|BigNumber|Number $value): bool
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return $this->value->isGreaterThan($value->getValue());
+    }
+
+    public function isGreaterThanOrEqualTo(string|int|float|BigNumber|Number $value): bool
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return $this->value->isGreaterThanOrEqualTo($value->getValue());
+    }
+
+    public function isEqualTo(string|int|float|BigNumber|Number $value): bool
+    {
+        if (! $value instanceof Number) {
+            $value = Number::of($value);
+        }
+
+        return $this->value->isEqualTo($value->getValue());
+    }
+
+    public function isZero(): bool
+    {
+        return $this->value->isZero();
+    }
+
+    public function isNegative(): bool
+    {
+        return $this->value->isNegative();
+    }
+
+    public function isNegativeOrZero(): bool
+    {
+        return $this->value->isNegativeOrZero();
+    }
+
+    public function isPositive(): bool
+    {
+        return $this->value->isPositive();
+    }
+
+    public function isPositiveOrZero(): bool
+    {
+        return $this->value->isPositiveOrZero();
     }
 
     public function getValue(): BigDecimal
