@@ -7,8 +7,8 @@ namespace Worksome\Number\Tests\Feature\Casts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use InvalidArgumentException;
 use Worksome\Number\Casts\NumberFromDecimal;
+use Worksome\Number\Exceptions\ValueIsNotANumberException;
 use Worksome\Number\Number;
 
 beforeEach(function () {
@@ -32,7 +32,7 @@ it('throws an exception for non-number values', function () {
     TestMoneyAsDecimal::create([
         'value' => 12345,
     ]);
-})->throws(InvalidArgumentException::class, 'The given value is not a Number instance');
+})->throws(ValueIsNotANumberException::class, 'The given decimal value is not a Number instance');
 
 it('configures the correct bindings for decimals', function ($value, string $binding) {
     $bindings = [];

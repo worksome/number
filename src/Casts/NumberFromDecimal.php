@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Number\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use InvalidArgumentException;
+use Worksome\Number\Exceptions\ValueIsNotANumberException;
 use Worksome\Number\Number;
 
 class NumberFromDecimal implements CastsAttributes
@@ -17,7 +17,7 @@ class NumberFromDecimal implements CastsAttributes
     ) {
     }
 
-    /** @param  float  $value */
+    /** @param  float|string  $value */
     public function get($model, string $key, $value, array $attributes)
     {
         return Number::of($value);
@@ -27,7 +27,7 @@ class NumberFromDecimal implements CastsAttributes
     public function set($model, string $key, $value, array $attributes)
     {
         if (! $value instanceof Number) {
-            throw new InvalidArgumentException('The given value is not a Number instance.');
+            throw ValueIsNotANumberException::fromDecimal();
         }
 
         return number_format(

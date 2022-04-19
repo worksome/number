@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Number\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use InvalidArgumentException;
+use Worksome\Number\Exceptions\ValueIsNotANumberException;
 use Worksome\Number\Number;
 
 class NumberFromCents implements CastsAttributes
@@ -20,7 +20,7 @@ class NumberFromCents implements CastsAttributes
     public function set($model, string $key, $value, array $attributes)
     {
         if (! $value instanceof Number) {
-            throw new InvalidArgumentException('The given value is not a Number instance.');
+            throw ValueIsNotANumberException::fromCents();
         }
 
         return $value->mul(100)->getValue()->toInt();
