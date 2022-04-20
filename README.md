@@ -1,63 +1,47 @@
 # Number
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/number.svg?style=flat-square)](https://packagist.org/packages/worksome/number)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/worksome/number/run-tests?label=tests)](https://github.com/worksome/number/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/worksome/number/Check%20&%20fix%20styling?label=code%20style)](https://github.com/worksome/number/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/worksome/number.svg?style=flat-square)](https://packagist.org/packages/worksome/number)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/number.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/worksome/number)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/worksome/number/Tests?label=Tests&style=flat-square)](https://github.com/owenvoke/number/actions?query=workflow%3ATests)
+[![GitHub PHPStan Action Status](https://img.shields.io/github/workflow/status/worksome/number/PHPStan?label=PHPStan&style=flat-square)](https://github.com/owenvoke/number/actions?query=workflow%3APHPStan)
+[![Total Downloads](https://img.shields.io/packagist/dt/worksome/number.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/worksome/number)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A package for handling numbers in Laravel.
 
 ## Installation
 
 You can install the package via composer:
 
-```bash
+```shell
 composer require worksome/number
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="number-migrations"
-php artisan migrate
 ```
 
 You can publish the config file with:
 
-```bash
+```shell
 php artisan vendor:publish --tag="number-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="number-views"
 ```
 
 ## Usage
 
 ```php
-$number = new Worksome\Number();
-echo $number->echoPhrase('Hello, Worksome!');
+use Worksome\Number\Number;
+
+$number = Number::of(100);
+
+$number->mul(Number::of(5));
+
+echo $number; // 500
 ```
 
 ## Testing
 
-```bash
+```shell
 composer test
 ```
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 

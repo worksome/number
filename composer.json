@@ -1,6 +1,6 @@
 {
     "name": "worksome/number",
-    "description": "This is my package number",
+    "description": "A package for handling numbers in Laravel",
     "keywords": [
         "worksome",
         "laravel",
