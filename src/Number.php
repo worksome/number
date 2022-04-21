@@ -185,6 +185,11 @@ class Number
         return $this->value->toFloat();
     }
 
+    public function inCents(): int
+    {
+        return (int) str_replace('.', '', $this->toString());
+    }
+
     public function __toString(): string
     {
         return $this->toString();
