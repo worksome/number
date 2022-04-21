@@ -250,6 +250,8 @@ it('can check if equal to', function (int|string|float $number, int|string|float
     '10.01 is 1001' => [1001, 1001],
     '0 is 0' => [0, 0],
     '-101.10 is -10110' => [-101.10, -101.10],
+    '101.001 as string is 101.001' => ['101.001', 101.001],
+    '-101.001 as string is -101.001' => ['-101.001', -101.001],
 ]);
 
 it('can get Number in cents', function (int|string|float $number, int $result) {
@@ -261,4 +263,6 @@ it('can get Number in cents', function (int|string|float $number, int $result) {
     '101.10 as string is 10110' => ['101.10', 10110],
     '1111111101.99 as string is 111111110199' => ['1111111101.99', 111111110199],
     '1.10 as string is 110' => ['1.10', 110],
+    '-1.10 is -110' => [-1.10, -110],
+    '-1111111101.99 is -111111110199' => [-1111111101.99, -111111110199],
 ]);
