@@ -15,12 +15,6 @@ You can install the package via composer:
 composer require worksome/number
 ```
 
-You can publish the config file with:
-
-```shell
-php artisan vendor:publish --tag="number-config"
-```
-
 ## Usage
 
 ```php
