@@ -187,7 +187,7 @@ class Number
 
     public function inCents(): int
     {
-        return (int) str_replace('.', '', $this->toString());
+        return $this->mul(100)->getValue()->toInt();
     }
 
     public function __toString(): string
