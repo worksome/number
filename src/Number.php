@@ -185,6 +185,11 @@ class Number
         return $this->value->toFloat();
     }
 
+    public function inCents(): int
+    {
+        return $this->mul(100)->getValue()->toInt();
+    }
+
     public function __toString(): string
     {
         return $this->toString();

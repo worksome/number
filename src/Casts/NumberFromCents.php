@@ -23,6 +23,6 @@ class NumberFromCents implements CastsAttributes
             throw ValueIsNotANumberException::fromCents();
         }
 
-        return $value->mul(100)->getValue()->toInt();
+        return $value->inCents();
     }
 }

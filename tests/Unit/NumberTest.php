@@ -242,3 +242,27 @@ it('can check whether number is positive or zero', function (int $number, bool $
     '-1 is not positive or zero' => [-1, false],
     '-10000 is not positive or zero' => [-10000, false],
 ]);
+
+it('can check if equal to', function (int|string|float $number, int|string|float $comparison) {
+    expect(Number::of($number)->isEqualTo(Number::of($comparison)))->toBe(true);
+})->with([
+    '1 is 1' => [1, 1],
+    '10.01 is 1001' => [1001, 1001],
+    '0 is 0' => [0, 0],
+    '-101.10 is -10110' => [-101.10, -101.10],
+    '101.001 as string is 101.001' => ['101.001', 101.001],
+    '-101.001 as string is -101.001' => ['-101.001', -101.001],
+]);
+
+it('can get Number in cents', function (int|string|float $number, int $result) {
+    expect(Number::of($number)->inCents())->toBe($result);
+})->with([
+    '1.00 as string is 1' => ['1.00', 100],
+    '10.01 is 1001' => [10.01, 1001],
+    '0 is 0' => [0.00, 0],
+    '101.10 as string is 10110' => ['101.10', 10110],
+    '1111111101.99 as string is 111111110199' => ['1111111101.99', 111111110199],
+    '1.10 as string is 110' => ['1.10', 110],
+    '-1.10 is -110' => [-1.10, -110],
+    '-1111111101.99 is -111111110199' => [-1111111101.99, -111111110199],
+]);
