@@ -6,6 +6,7 @@ use GraphQL\GraphQL;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Types\NumberType;
+use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 use function Spatie\Snapshots\assertMatchesTextSnapshot;
 
 it('can resolve fields on a GraphQL Number type', function () {
@@ -24,17 +25,11 @@ it('can resolve fields on a GraphQL Number type', function () {
         }
     GQL;
 
-    expect(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.name'))->toBe('Number')
-        ->and(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.fields.*.name'))->toBe([
-            'isZero',
-            'isNegative',
-            'isNegativeOrZero',
-            'isPositive',
-            'isPositiveOrZero',
-            'toString',
-            'toFloat',
-            'inCents',
-        ]);
+    expect(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.name'))->toBe('Number');
+
+    assertMatchesJsonSnapshot(
+        json_encode(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.fields.*.name'))
+    );
 });
 
 it('can generate schema for GraphQL Number type', function () {
