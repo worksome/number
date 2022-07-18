@@ -33,6 +33,14 @@ echo $number; // 500
 composer test
 ```
 
+### Updating snapshots
+
+To update Pest snapshots, run the following:
+
+```shell
+vendor/bin/pest -d --update-snapshots
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

@@ -1,0 +1,26 @@
+"""A generic representation of a number."""
+type Number {
+  """Whether the number is zero."""
+  isZero: Boolean!
+
+  """Whether the number is negative."""
+  isNegative: Boolean!
+
+  """Whether the number is negative or zero."""
+  isNegativeOrZero: Boolean!
+
+  """Whether the number is positive."""
+  isPositive: Boolean!
+
+  """Whether the number is positive or zero."""
+  isPositiveOrZero: Boolean!
+
+  """Retrieve the number as a string representation."""
+  toString: String!
+
+  """Retrieve the number as a float."""
+  toFloat: Float!
+
+  """Retrieve the number in cents (only applies to monetary values)."""
+  inCents: Int!
+}
