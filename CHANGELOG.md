@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 0.1.3 - 2022-07-18
+
+### Added
+- Add new GraphQL type for Lighthouse ([#11](https://github.com/worksome/number/pull/11))
+
 ## 0.1.2 - 2022-05-21
 
 ### Added
