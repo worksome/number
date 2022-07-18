@@ -27,10 +27,31 @@ $number->mul(Number::of(5));
 echo $number; // 500
 ```
 
+### GraphQL
+
+This package also provides a GraphQL type for the [WebOnyx GraphQL PHP package](https://github.com/webonyx/graphql-php) / [Lighthouse](https://lighthouse-php.com).
+
+This can be registered in the type registry using:
+
+```php
+use Worksome\Number\GraphQL\Types\NumberType;
+
+// In Lighthouse (https://lighthouse-php.com)
+$typeRegistry->register(new NumberType());
+```
+
 ## Testing
 
 ```shell
 composer test
+```
+
+### Updating snapshots
+
+To update Pest snapshots, run the following:
+
+```shell
+vendor/bin/pest -d --update-snapshots
 ```
 
 ## Changelog

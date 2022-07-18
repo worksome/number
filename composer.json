@@ -25,6 +25,8 @@
         "orchestra/testbench": "^6.22 || ^7.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-parallel": "^1.0",
+        "spatie/pest-plugin-snapshots": "^1.1",
+        "webonyx/graphql-php": "^14.11",
         "worksome/coding-style": "^0.16.0",
         "worksome/pest-plugin-silence": "^0.1"
     },
