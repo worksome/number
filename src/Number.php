@@ -11,23 +11,25 @@ use InvalidArgumentException;
 
 class Number
 {
-    private const ALLOWED_ROUNDING_MODES = [
+    protected const ALLOWED_ROUNDING_MODES = [
         RoundingMode::UNNECESSARY, RoundingMode::UP, RoundingMode::DOWN, RoundingMode::HALF_UP, RoundingMode::HALF_DOWN,
+        RoundingMode::HALF_CEILING, RoundingMode::HALF_FLOOR, RoundingMode::HALF_EVEN,
     ];
 
-    private function __construct(private BigDecimal $value, private int $roundingMode)
+    protected function __construct(protected BigDecimal $value, protected int $roundingMode)
     {
+        $this->validate();
     }
 
     /** @see RoundingMode for available rounding mode constants */
-    public static function of(string|int|float|BigNumber|Number $value, ?int $roundingMode = null): Number
+    public static function of(string|int|float|BigNumber|Number $value, ?int $roundingMode = null): static
     {
         if ($value instanceof Number && $roundingMode === null) {
             $roundingMode = $value->getRoundingMode();
         }
 
         if ($roundingMode === null) {
-            $roundingMode = RoundingMode::UNNECESSARY;
+            $roundingMode = RoundingMode::HALF_EVEN;
         }
 
         if (! in_array($roundingMode, self::ALLOWED_ROUNDING_MODES)) {
@@ -35,14 +37,14 @@ class Number
         }
 
         if ($value instanceof BigNumber) {
-            return new self($value->toBigDecimal(), $roundingMode);
+            return new static($value->toBigDecimal(), $roundingMode);
         }
 
         if ($value instanceof Number) {
-            return new self($value->getValue(), $roundingMode);
+            return new static($value->getValue(), $roundingMode);
         }
 
-        return new self(BigDecimal::of($value), $roundingMode);
+        return new static(BigDecimal::of($value), $roundingMode);
     }
 
     public function add(string|int|float|BigNumber|Number $value): Number
@@ -193,5 +195,10 @@ class Number
     public function __toString(): string
     {
         return $this->toString();
+    }
+
+    protected function validate(): void
+    {
+        //
     }
 }

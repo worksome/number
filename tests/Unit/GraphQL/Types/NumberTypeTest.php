@@ -6,6 +6,7 @@ use GraphQL\GraphQL;
 use GraphQL\Type\Schema;
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Types\NumberType;
+
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 use function Spatie\Snapshots\assertMatchesTextSnapshot;
 

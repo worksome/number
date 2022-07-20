@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Number\Exceptions;
 
-use InvalidArgumentException;
-
-class ValueIsNotANumberException extends InvalidArgumentException
+class ValueIsNotANumberException extends InvalidValueException
 {
     public static function fromDecimal(): self
     {
