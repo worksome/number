@@ -16,7 +16,7 @@ class Number
         RoundingMode::HALF_CEILING, RoundingMode::HALF_FLOOR, RoundingMode::HALF_EVEN,
     ];
 
-    protected function __construct(protected BigDecimal $value, protected int $roundingMode)
+    final protected function __construct(protected BigDecimal $value, protected int $roundingMode)
     {
         $this->validate();
     }
