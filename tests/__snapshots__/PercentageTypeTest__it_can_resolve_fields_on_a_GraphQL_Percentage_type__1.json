@@ -1,0 +1,9 @@
+[
+    "isZero",
+    "isNegative",
+    "isNegativeOrZero",
+    "isPositive",
+    "isPositiveOrZero",
+    "toString",
+    "toFloat"
+]
