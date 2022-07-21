@@ -5,6 +5,7 @@ declare(strict_types=1);
 use GraphQL\Error\Error;
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\StrictPercentageType as StrictPercentage;
+
 use function Spatie\Snapshots\assertMatchesTextSnapshot;
 
 it('can serialize', function ($value, $expected) {

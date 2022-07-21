@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Worksome\Number\GraphQL\Scalars;
 
-use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Type\Definition\ScalarType;
-use Worksome\Number\Exceptions\BaseException;
-use Worksome\Number\Number;
+use Worksome\Number\Exceptions\NumberException;
 use Worksome\Number\StrictPercentage;
 
 final class StrictPercentageType extends ScalarType
@@ -23,7 +21,9 @@ final class StrictPercentageType extends ScalarType
 
     /**
      * @param string|int|float $value
+     *
      * @return float
+     *
      * @throws Error
      */
     public function serialize($value)
@@ -33,14 +33,16 @@ final class StrictPercentageType extends ScalarType
 
     /**
      * @param string|int|float $value
+     *
      * @return float
+     *
      * @throws Error
      */
     public function parseValue($value)
     {
         try {
             return StrictPercentage::of($value)->toFloat();
-        } catch (BaseException|NumberFormatException $exception) {
+        } catch (NumberException | NumberFormatException $exception) {
             throw new Error($exception->getMessage());
         }
     }

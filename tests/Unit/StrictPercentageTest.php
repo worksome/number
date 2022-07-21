@@ -42,11 +42,13 @@ it('can instantiate a Strict Percentage from values', function (string|int|float
     '`0.1` as Number from float' => StrictPercentage::of(0.1),
 ]);
 
-it('throws an exception when an invalid percentage is provided',
+it(
+    'throws an exception when an invalid percentage is provided',
     function (string|int|float|BigDecimal|StrictPercentage $value) {
         /** @var Expectation $expectation */
         StrictPercentage::of($value);
-    })->with([
+    }
+)->with([
     'too large (string)' => '101',
     'too small (string)' => '-1',
     'too large (int)' => 101,

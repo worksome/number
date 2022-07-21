@@ -10,7 +10,7 @@ use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Type\Definition\ScalarType;
-use Worksome\Number\Exceptions\BaseException;
+use Worksome\Number\Exceptions\NumberException;
 use Worksome\Number\Percentage;
 
 final class PercentageType extends ScalarType
@@ -21,7 +21,9 @@ final class PercentageType extends ScalarType
 
     /**
      * @param string|int|float $value
+     *
      * @return float
+     *
      * @throws Error
      */
     public function serialize($value)
@@ -31,14 +33,16 @@ final class PercentageType extends ScalarType
 
     /**
      * @param string|int|float $value
+     *
      * @return float
+     *
      * @throws Error
      */
     public function parseValue($value)
     {
         try {
             return Percentage::of($value)->toFloat();
-        } catch (BaseException|NumberFormatException $exception) {
+        } catch (NumberException | NumberFormatException $exception) {
             throw new Error($exception->getMessage());
         }
     }

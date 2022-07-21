@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\PercentageType as Percentage;
+
 use function Spatie\Snapshots\assertMatchesTextSnapshot;
 
 it('can serialize', function ($value, $expected) {
