@@ -50,7 +50,7 @@ final class PercentageType extends ScalarType
     public function parseLiteral(Node $valueNode, ?array $variables = null)
     {
         if (! $valueNode instanceof IntValueNode && ! $valueNode instanceof FloatValueNode) {
-            throw new Error("Query error: Can only parse integer or float got: " . $valueNode->kind, [$valueNode]);
+            throw new Error("Query error: Can only parse integer or float. Got: " . $valueNode->kind, [$valueNode]);
         }
 
         return Percentage::of($valueNode->value)->toFloat();
