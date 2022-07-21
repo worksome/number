@@ -6,7 +6,7 @@ namespace Worksome\Number\Exceptions;
 
 use InvalidArgumentException;
 
-class ValueIsNotANumberException extends InvalidArgumentException
+class ValueIsNotANumberException extends InvalidArgumentException implements NumberException
 {
     public static function fromDecimal(): self
     {

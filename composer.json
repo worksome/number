@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "brick/math": "^0.9.3"
+        "brick/math": "^0.9.3",
+        "nuwave/lighthouse": "^5.57"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.10 || ^6.0",
@@ -26,7 +27,6 @@
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-parallel": "^1.0",
         "spatie/pest-plugin-snapshots": "^1.1",
-        "webonyx/graphql-php": "^14.11",
         "worksome/coding-style": "^0.16.0",
         "worksome/pest-plugin-silence": "^0.1"
     },
@@ -57,6 +57,13 @@
             "@test:types",
             "@test:unit"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Worksome\\Number\\Providers\\NumberServiceProvider"
+            ]
+        }
     },
     "config": {
         "sort-packages": true,
