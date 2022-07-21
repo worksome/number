@@ -2,39 +2,23 @@
 
 declare(strict_types=1);
 
-use GraphQL\GraphQL;
-use GraphQL\Type\Schema;
+use Brick\Math\Exception\IntegerOverflowException;
 use GraphQL\Utils\SchemaPrinter;
-use Worksome\Number\GraphQL\Types\PercentageType;
-
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+use Worksome\Number\GraphQL\Scalars\PercentageType as Percentage;
 use function Spatie\Snapshots\assertMatchesTextSnapshot;
 
-it('can resolve fields on a GraphQL Percentage type', function () {
-    $numberType = new PercentageType();
+it('can serialize', function ($value, $expected) {
+    $serialized = (new Percentage())->serialize($value);
 
-    $schema = new Schema(['query' => $numberType]);
+    expect($serialized)->toBeFloat()->toBe($expected);
+})->with([
+    'integer to float' => [100, 100.0],
+    'float to float' => [100.0, 100.0],
+    'string to float' => ['100', 100.0],
+]);
 
-    $request = <<<'GQL'
-        {
-            __type(name: "Percentage") {
-                name
-                fields {
-                    name
-                }
-            }
-        }
-    GQL;
-
-    expect(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.name'))->toBe('Percentage');
-
-    assertMatchesJsonSnapshot(
-        json_encode(data_get(GraphQL::executeQuery($schema, $request)->toArray(), 'data.__type.fields.*.name'))
-    );
-});
-
-it('can generate schema for GraphQL Percentage type', function () {
-    $type = new PercentageType();
+it('can generate schema for GraphQL Percentage scalar', function () {
+    $type = new Percentage();
 
     assertMatchesTextSnapshot(SchemaPrinter::printType($type));
 });

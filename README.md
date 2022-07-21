@@ -34,7 +34,7 @@ This package also provides a GraphQL type for the [WebOnyx GraphQL PHP package](
 This can be registered in the type registry using:
 
 ```php
-use Worksome\Number\GraphQL\Types\NumberType;
+use Worksome\Number\GraphQL\Scalars\NumberType;
 
 // In Lighthouse (https://lighthouse-php.com)
 $typeRegistry->register(new NumberType());

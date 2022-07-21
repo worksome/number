@@ -1,0 +1,5 @@
+"""
+The `StrictPercentage` scalar type represents a strict percentage. This means
+that it cannot be less than 0% or greater than 100%.
+"""
+scalar StrictPercentage
