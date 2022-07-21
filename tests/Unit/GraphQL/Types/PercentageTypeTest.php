@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Brick\Math\Exception\IntegerOverflowException;
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\PercentageType as Percentage;
 use function Spatie\Snapshots\assertMatchesTextSnapshot;

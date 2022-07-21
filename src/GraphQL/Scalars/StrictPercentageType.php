@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Number\GraphQL\Scalars;
 
+use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\FloatValueNode;
@@ -11,6 +12,7 @@ use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Type\Definition\ScalarType;
 use Worksome\Number\Exceptions\BaseException;
+use Worksome\Number\Number;
 use Worksome\Number\StrictPercentage;
 
 final class StrictPercentageType extends ScalarType
@@ -19,11 +21,21 @@ final class StrictPercentageType extends ScalarType
         The `StrictPercentage` scalar type represents a strict percentage. This means that it cannot be less than 0% or greater than 100%.
         TXT;
 
+    /**
+     * @param string|int|float $value
+     * @return float
+     * @throws Error
+     */
     public function serialize($value)
     {
         return $this->parseValue($value);
     }
 
+    /**
+     * @param string|int|float $value
+     * @return float
+     * @throws Error
+     */
     public function parseValue($value)
     {
         try {

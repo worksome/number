@@ -19,11 +19,21 @@ final class PercentageType extends ScalarType
         The `Percentage` scalar type represents a percentage.
         TXT;
 
+    /**
+     * @param string|int|float $value
+     * @return float
+     * @throws Error
+     */
     public function serialize($value)
     {
         return $this->parseValue($value);
     }
 
+    /**
+     * @param string|int|float $value
+     * @return float
+     * @throws Error
+     */
     public function parseValue($value)
     {
         try {
