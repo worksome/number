@@ -2,6 +2,14 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 0.2.0 - 2022-07-21
+
+### Added
+- Add new percentage types ([#12](https://github.com/worksome/number/pull/12))
+
+### Changed
+- Refactor GraphQL `Number` type to scalar ([#12](https://github.com/worksome/number/pull/12))
+
 ## 0.1.3 - 2022-07-18
 
 ### Added
