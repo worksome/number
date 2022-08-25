@@ -267,8 +267,13 @@ it('can get Number in cents', function (int|string|float $number, int $result) {
     '-1111111101.99 is -111111110199' => [-1111111101.99, -111111110199],
 ]);
 
-it('can specify the number of decimal places for division', function () {
-    expect(Number::of(20, RoundingMode::HALF_UP)->div(100))
-        ->toString()->toBe('0.20')
-        ->toFloat()->toBe(0.2);
-});
+it('can specify the number of decimal places for division', function ($result, $expectedString, $expectedFloat) {
+    expect($result)
+        ->toString()->toBe($expectedString)
+        ->toFloat()->toBe($expectedFloat);
+})->with([
+    [Number::of(20, RoundingMode::HALF_UP)->div(100), '0.20', 0.2],
+    [Number::of(10.5, RoundingMode::HALF_UP)->div(2), '5.25', 5.25],
+    [Number::of(5.2, RoundingMode::HALF_UP)->div(4.5, 3), '1.156', 1.156],
+    [Number::of(4.1234, RoundingMode::HALF_UP)->div(2.2, 3), '1.874', 1.874],
+]);

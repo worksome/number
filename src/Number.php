@@ -22,7 +22,7 @@ class Number
     }
 
     /** @see RoundingMode for available rounding mode constants */
-    public static function of(string|int|float|BigNumber|Number $value, ?int $roundingMode = null, ?int $decimalPlaces = 2): static
+    public static function of(string|int|float|BigNumber|Number $value, ?int $roundingMode = null): static
     {
         if ($value instanceof Number && $roundingMode === null) {
             $roundingMode = $value->getRoundingMode();
