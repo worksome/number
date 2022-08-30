@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 1.0.0 - 2022-08-30
+
+### Fixed
+- Fixed decimal places when dividing numbers ([#13](https://github.com/worksome/number/pull/13))
+
 ## 0.2.0 - 2022-07-21
 
 ### Added
