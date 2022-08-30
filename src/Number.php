@@ -74,13 +74,13 @@ class Number
         return static::of($this->value->multipliedBy($value->value));
     }
 
-    public function div(string|int|float|BigNumber|Number $value): Number
+    public function div(string|int|float|BigNumber|Number $value, int $decimalPlaces = 2): Number
     {
         if (! $value instanceof Number) {
             $value = Number::of($value);
         }
 
-        return static::of($this->value->dividedBy($value->value, null, $this->getRoundingMode()));
+        return static::of($this->value->dividedBy($value->value, $decimalPlaces, $this->getRoundingMode()));
     }
 
     public function percentage(int|Number $value): Number

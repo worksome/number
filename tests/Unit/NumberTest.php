@@ -66,7 +66,7 @@ it('is immutable', function () {
 it('can handle rounding numbers', function (int|null $mode, int $result, ?Number $existing = null) {
     $number = $existing instanceof Number ? Number::of($existing) : Number::of(1000, $mode);
 
-    expect(Number::of($number, $mode)->div(Number::of(3, $mode))->getValue()->toInt())->toEqual($result);
+    expect(Number::of($number, $mode)->div(Number::of(3, $mode), 0)->getValue()->toInt())->toEqual($result);
 })->with([
      'existing' => [null, 334, Number::of(1000, RoundingMode::UP)],
     // 'default' => [null, 334],
@@ -110,12 +110,12 @@ it('can multiply numbers', function (string|int|float $number, string|int|float|
 ]);
 
 it('can divide numbers', function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
-    expect(Number::of($number)->div($change)->getValue())->toEqual(BigDecimal::of($result));
+    expect(Number::of($number)->div($change)->toString())->toEqual($result);
 })->with([
-    'integers as strings as Number' => ['10', Number::of('2'), '5'],
-    'integers as strings' => ['10', '2', '5'],
-    'integers as Number' => [10, Number::of(2), 5],
-    'integers' => [10, 2, 5],
+    'integers as strings as Number' => ['10', Number::of('2'), '5.00'],
+    'integers as strings' => ['10', '2', '5.00'],
+    'integers as Number' => [10, Number::of(2), '5.00'],
+    'integers' => [10, 2, '5.00'],
     'floats as strings as Number' => ['10.02', Number::of('2'), '5.01'],
 ]);
 
@@ -265,4 +265,15 @@ it('can get Number in cents', function (int|string|float $number, int $result) {
     '1.10 as string is 110' => ['1.10', 110],
     '-1.10 is -110' => [-1.10, -110],
     '-1111111101.99 is -111111110199' => [-1111111101.99, -111111110199],
+]);
+
+it('can specify the number of decimal places for division', function ($result, $expectedString, $expectedFloat) {
+    expect($result)
+        ->toString()->toBe($expectedString)
+        ->toFloat()->toBe($expectedFloat);
+})->with([
+    [Number::of(20, RoundingMode::HALF_UP)->div(100), '0.20', 0.2],
+    [Number::of(10.5, RoundingMode::HALF_UP)->div(2), '5.25', 5.25],
+    [Number::of(5.2, RoundingMode::HALF_UP)->div(4.5, 3), '1.156', 1.156],
+    [Number::of(4.1234, RoundingMode::HALF_UP)->div(2.2, 3), '1.874', 1.874],
 ]);
