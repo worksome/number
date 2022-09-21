@@ -1,2 +1,2 @@
-"""The `Percentage` scalar type represents a percentage."""
+"The `Percentage` scalar type represents a percentage."
 scalar Percentage
