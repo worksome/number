@@ -1,11 +1,2 @@
 parameters:
 	ignoreErrors:
-		-
-			message: "#^Parameter \\#2 \\$nodes of class GraphQL\\\\Error\\\\Error constructor expects GraphQL\\\\Language\\\\AST\\\\Node\\|\\(iterable\\<GraphQL\\\\Language\\\\AST\\\\Node\\>&Traversable\\)\\|null, array\\<int, GraphQL\\\\Language\\\\AST\\\\BooleanValueNode\\|GraphQL\\\\Language\\\\AST\\\\NullValueNode\\|GraphQL\\\\Language\\\\AST\\\\StringValueNode\\> given\\.$#"
-			count: 1
-			path: src/GraphQL/Scalars/PercentageType.php
-
-		-
-			message: "#^Parameter \\#2 \\$nodes of class GraphQL\\\\Error\\\\Error constructor expects GraphQL\\\\Language\\\\AST\\\\Node\\|\\(iterable\\<GraphQL\\\\Language\\\\AST\\\\Node\\>&Traversable\\)\\|null, array\\<int, GraphQL\\\\Language\\\\AST\\\\BooleanValueNode\\|GraphQL\\\\Language\\\\AST\\\\NullValueNode\\|GraphQL\\\\Language\\\\AST\\\\StringValueNode\\> given\\.$#"
-			count: 1
-			path: src/GraphQL/Scalars/StrictPercentageType.php
