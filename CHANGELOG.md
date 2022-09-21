@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 1.1.0 - 2022-09-21
+
+### Fixed
+- Fix types on GraphQL scalars ([#14](https://github.com/worksome/number/pull/14))
+
 ## 1.0.0 - 2022-08-30
 
 ### Fixed
