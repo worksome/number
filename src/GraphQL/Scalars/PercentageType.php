@@ -15,7 +15,7 @@ use Worksome\Number\Percentage;
 
 final class PercentageType extends ScalarType
 {
-    public $description = <<<TXT
+    public string|null $description = <<<TXT
         The `Percentage` scalar type represents a percentage.
         TXT;
 
