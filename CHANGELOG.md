@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 1.1.1 - 2022-09-22
+
+### Fixed
+- Revert type changes from 1.1.0 ([#15](https://github.com/worksome/number/pull/15))
+
 ## 1.1.0 - 2022-09-21
 
 ### Fixed
