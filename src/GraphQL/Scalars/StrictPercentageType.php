@@ -15,7 +15,7 @@ use Worksome\Number\StrictPercentage;
 
 final class StrictPercentageType extends ScalarType
 {
-    public string|null $description = <<<TXT
+    public $description = <<<TXT
         The `StrictPercentage` scalar type represents a percentage that cannot be less than 0% or greater than 100%.
         TXT;
 

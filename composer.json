@@ -18,8 +18,7 @@
     "require": {
         "php": "^8.0",
         "brick/math": "^0.9.3",
-        "nuwave/lighthouse": "^5.61",
-        "webonyx/graphql-php": "^14.11.7"
+        "nuwave/lighthouse": "^5.57"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.10 || ^6.0",
