@@ -99,9 +99,12 @@ it('can subtract numbers', function (string|int|float $number, string|int|float 
     'floats' => [0.002, 0.001, 0.001],
 ]);
 
-it('can multiply numbers', function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
-    expect(Number::of($number)->mul($change)->getValue())->toEqual(BigDecimal::of($result));
-})->with([
+it(
+    'can multiply numbers',
+    function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
+        expect(Number::of($number)->mul($change)->getValue())->toEqual(BigDecimal::of($result));
+    }
+)->with([
     'integers as strings as Number' => ['2', Number::of('10'), '20'],
     'integers as strings' => ['2', '10', '20'],
     'integers as Number' => [2, Number::of(10), 20],
@@ -109,9 +112,12 @@ it('can multiply numbers', function (string|int|float $number, string|int|float|
     'floats as strings as Number' => ['0.001', Number::of('0.002'), '0.000002'],
 ]);
 
-it('can divide numbers', function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
-    expect(Number::of($number)->div($change)->toString())->toEqual($result);
-})->with([
+it(
+    'can divide numbers',
+    function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
+        expect(Number::of($number)->div($change)->toString())->toEqual($result);
+    }
+)->with([
     'integers as strings as Number' => ['10', Number::of('2'), '5.00'],
     'integers as strings' => ['10', '2', '5.00'],
     'integers as Number' => [10, Number::of(2), '5.00'],
@@ -119,9 +125,12 @@ it('can divide numbers', function (string|int|float $number, string|int|float|Nu
     'floats as strings as Number' => ['10.02', Number::of('2'), '5.01'],
 ]);
 
-it('can get percentage of numbers', function (string|int|float $number, int|Number $percentage, string|int|float $result) {
-    expect(Number::of($number)->percentage($percentage)->getValue())->toEqual(BigDecimal::of($result));
-})->with([
+it(
+    'can get percentage of numbers',
+    function (string|int|float $number, int|Number $percentage, string|int|float $result) {
+        expect(Number::of($number)->percentage($percentage)->getValue())->toEqual(BigDecimal::of($result));
+    }
+)->with([
     'integers as strings as Number' => ['500', Number::of('10'), '50'],
     'integers as strings' => ['500', '10', '50'],
     'integers as Number' => [500, Number::of(10), 50],

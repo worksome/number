@@ -199,6 +199,5 @@ class Number
 
     protected function validate(): void
     {
-        //
     }
 }
