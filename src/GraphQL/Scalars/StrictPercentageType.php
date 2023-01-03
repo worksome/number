@@ -42,7 +42,7 @@ final class StrictPercentageType extends ScalarType
     {
         try {
             return StrictPercentage::of($value)->toFloat();
-        } catch (NumberException | NumberFormatException $exception) {
+        } catch (NumberException|NumberFormatException $exception) {
             throw new Error($exception->getMessage());
         }
     }

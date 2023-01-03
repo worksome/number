@@ -42,7 +42,7 @@ final class PercentageType extends ScalarType
     {
         try {
             return Percentage::of($value)->toFloat();
-        } catch (NumberException | NumberFormatException $exception) {
+        } catch (NumberException|NumberFormatException $exception) {
             throw new Error($exception->getMessage());
         }
     }
