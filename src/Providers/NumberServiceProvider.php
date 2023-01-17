@@ -11,9 +11,11 @@ use Worksome\Number\GraphQL\Scalars\StrictPercentageType;
 
 class NumberServiceProvider extends ServiceProvider
 {
-    public function boot(TypeRegistry $registry): void
+    public function boot(): void
     {
-        $registry->register(new PercentageType());
-        $registry->register(new StrictPercentageType());
+        $this->callAfterResolving(TypeRegistry::class, function (TypeRegistry $registry) {
+            $registry->register(new PercentageType());
+            $registry->register(new StrictPercentageType());
+        });
     }
 }
