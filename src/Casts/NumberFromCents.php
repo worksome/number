@@ -8,6 +8,9 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Worksome\Number\Exceptions\ValueIsNotANumberException;
 use Worksome\Number\Number;
 
+/**
+ * @implements CastsAttributes<Number, Number>
+ */
 class NumberFromCents implements CastsAttributes
 {
     /** @param int $value */
