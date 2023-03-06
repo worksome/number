@@ -2,10 +2,20 @@
 
 All notable changes to `number` will be documented in this file.
 
-## 1.2.0 - 2023-03-06
+## 1.3.0 - 2023-03-06
 
 ### Added
 - Update to Lighthouse ^6.0 ([#22](https://github.com/worksome/number/pull/22))
+
+## 1.2.1 - 2023-02-02
+
+### Fixed
+- Fix GraphQL 15.x support ([c215976](https://github.com/worksome/number/commit/c215976de7932d9452b85190acc9107d8391f7de))
+
+## 1.2.0 - 2023-02-02
+
+### Added
+- Add support for Lighthouse `dev-master` ([4c0ddeb](https://github.com/worksome/number/commit/4c0ddebaf48822da9d971c2b78aa37d348540d0b))
 
 ## 1.1.1 - 2022-09-22
 
