@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.2",
         "brick/math": "^0.9.3",
-        "nuwave/lighthouse": "^5.71.0"
+        "nuwave/lighthouse": "^6.0"
     },
     "require-dev": {
         "nunomaduro/collision": "^6.0",
