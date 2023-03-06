@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 1.2.0 - 2023-03-06
+
+### Added
+- Update to Lighthouse ^6.0 ([#22](https://github.com/worksome/number/pull/22))
+
 ## 1.1.1 - 2022-09-22
 
 ### Fixed
