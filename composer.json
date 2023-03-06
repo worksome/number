@@ -18,17 +18,17 @@
     "require": {
         "php": "^8.2",
         "brick/math": "^0.9.3",
-        "nuwave/lighthouse": "dev-master"
+        "nuwave/lighthouse": "dev-master",
+        "webonyx/graphql-php": "^15.2.1"
     },
     "require-dev": {
         "nunomaduro/collision": "^6.0",
-        "nunomaduro/larastan": "^2.0",
-        "orchestra/testbench": "^7.0",
-        "pestphp/pest": "^1.21",
+        "nunomaduro/larastan": "^2.5.1",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^1.22.4",
         "pestphp/pest-plugin-parallel": "^1.0",
         "spatie/pest-plugin-snapshots": "^1.1",
-        "worksome/coding-style": "^2.3.2",
-        "worksome/pest-plugin-silence": "^0.1"
+        "worksome/coding-style": "^2.5"
     },
     "autoload": {
         "psr-4": {
