@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "brick/math": "^0.11",
+        "brick/math": "^0.9.3 || ^0.10 || ^0.11",
         "nuwave/lighthouse": "^6.0",
         "webonyx/graphql-php": "^15.2.1"
     },
