@@ -2,6 +2,11 @@
 
 All notable changes to `number` will be documented in this file.
 
+## 1.3.1 - 2023-03-07
+
+### Added
+- Add support for Brick Math 0.10 / 0.11 ([#23](https://github.com/worksome/number/pull/23))
+
 ## 1.3.0 - 2023-03-06
 
 ### Added
