@@ -6,8 +6,6 @@ use GraphQL\Error\Error;
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\StrictPercentageType as StrictPercentage;
 
-use function Spatie\Snapshots\assertMatchesTextSnapshot;
-
 it('can serialize', function ($value, $expected) {
     $serialized = (new StrictPercentage())->serialize($value);
 
@@ -29,5 +27,5 @@ it('throws an error with invalid value', function ($value) {
 it('can generate schema for GraphQL StrictPercentage scalar', function () {
     $type = new StrictPercentage();
 
-    assertMatchesTextSnapshot(SchemaPrinter::printType($type));
+    expect(SchemaPrinter::printType($type))->toMatchSnapshot();
 });

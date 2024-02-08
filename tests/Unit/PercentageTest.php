@@ -63,7 +63,7 @@ it('is immutable', function () {
     expect($number->getValue())->toEqual(BigDecimal::of(123456));
 });
 
-it('can get underlying value as string', function (string $number, string $result) {
+it('can get underlying value as string', function (string|float $number, string $result) {
     expect(Percentage::of($number)->toString())->toEqual($result);
 })->with([
     'integers as strings' => ['10', '10%'],
