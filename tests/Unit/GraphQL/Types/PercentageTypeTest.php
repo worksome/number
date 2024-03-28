@@ -5,8 +5,6 @@ declare(strict_types=1);
 use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\PercentageType as Percentage;
 
-use function Spatie\Snapshots\assertMatchesTextSnapshot;
-
 it('can serialize', function ($value, $expected) {
     $serialized = (new Percentage())->serialize($value);
 
@@ -20,5 +18,5 @@ it('can serialize', function ($value, $expected) {
 it('can generate schema for GraphQL Percentage scalar', function () {
     $type = new Percentage();
 
-    assertMatchesTextSnapshot(SchemaPrinter::printType($type));
+    expect(SchemaPrinter::printType($type))->toMatchSnapshot();
 });

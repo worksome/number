@@ -7,7 +7,7 @@ use Brick\Math\RoundingMode;
 use Pest\Expectation;
 use Worksome\Number\Number;
 
-it('can instantiate a Number from values', function (string|int|float|BigDecimal|Number $value) {
+it('can instantiate a Number from values', function (mixed $value) {
     /** @var Expectation $expectation */
     $expectation = expect(Number::of($value))->toBeInstanceOf(Number::class);
 
@@ -63,7 +63,7 @@ it('is immutable', function () {
     expect($number->getValue())->toEqual(BigDecimal::of(123456));
 });
 
-it('can handle rounding numbers', function (int|null $mode, int $result, ?Number $existing = null) {
+it('can handle rounding numbers', function (int|null $mode, int $result, Number|null $existing = null) {
     $number = $existing instanceof Number ? Number::of($existing) : Number::of(1000, $mode);
 
     expect(Number::of($number, $mode)->div(Number::of(3, $mode), 0)->getValue()->toInt())->toEqual($result);
@@ -77,7 +77,7 @@ it('can handle rounding numbers', function (int|null $mode, int $result, ?Number
     'rounding half down' => [RoundingMode::HALF_DOWN, 333],
 ]);
 
-it('can add numbers', function (string|int|float $number, string|int|float $change, string|int|float $result) {
+it('can add numbers', function (mixed $number, mixed $change, mixed $result) {
     expect(Number::of($number)->add(Number::of($change))->getValue())->toEqual(BigDecimal::of($result));
 })->with([
     'integers as strings' => ['123456', '123456', '246912'],
@@ -86,7 +86,7 @@ it('can add numbers', function (string|int|float $number, string|int|float $chan
     'floats' => [0.001, 0.002, 0.003],
 ]);
 
-it('can subtract numbers', function (string|int|float $number, string|int|float $change, string|int|float $result) {
+it('can subtract numbers', function (mixed $number, mixed $change, mixed $result) {
     expect(Number::of($number)->sub($change)->getValue())->toEqual(BigDecimal::of($result));
 })->with([
     'integers as strings as Number' => ['123456', Number::of('123456'), '0'],
@@ -101,7 +101,7 @@ it('can subtract numbers', function (string|int|float $number, string|int|float 
 
 it(
     'can multiply numbers',
-    function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
+    function (mixed $number, mixed $change, mixed $result) {
         expect(Number::of($number)->mul($change)->getValue())->toEqual(BigDecimal::of($result));
     }
 )->with([
@@ -114,7 +114,7 @@ it(
 
 it(
     'can divide numbers',
-    function (string|int|float $number, string|int|float|Number $change, string|int|float $result) {
+    function (mixed $number, mixed $change, mixed $result) {
         expect(Number::of($number)->div($change)->toString())->toEqual($result);
     }
 )->with([
@@ -127,7 +127,7 @@ it(
 
 it(
     'can get percentage of numbers',
-    function (string|int|float $number, int|Number $percentage, string|int|float $result) {
+    function (mixed $number, mixed $percentage, mixed $result) {
         expect(Number::of($number)->percentage($percentage)->getValue())->toEqual(BigDecimal::of($result));
     }
 )->with([
@@ -137,7 +137,7 @@ it(
     'integers' => [500, 10, 50],
 ]);
 
-it('can negate numbers', function (string|int|float $number, string|int|float $result) {
+it('can negate numbers', function (mixed $number, mixed $result) {
     expect(Number::of($number)->negate()->getValue())->toEqual(BigDecimal::of($result));
 })->with([
     'integers as strings' => ['10', '-10'],
@@ -146,17 +146,17 @@ it('can negate numbers', function (string|int|float $number, string|int|float $r
     'floats' => [0.002, -0.002],
 ]);
 
-it('can get underlying value as string', function (string $number, string $result) {
+it('can get underlying value as string', function (mixed $number, string $result) {
     expect(Number::of($number)->toString())->toEqual($result);
 })->with([
     'integers as strings' => ['10', '10'],
-    'integers' => [2, 2],
+    'integers' => [2, '2'],
     'floats as strings' => ['0.002', '0.002'],
-    'floats' => [0.002, 0.002],
+    'floats' => [0.002, '0.002'],
     'large floats as strings' => ['1000000001.1000000001', '1000000001.1000000001'],
 ]);
 
-it('can get underlying value as float', function (string $number, float $result) {
+it('can get underlying value as float', function (mixed $number, float $result) {
     expect(Number::of($number)->toFloat())->toEqual($result);
 })->with([
     'integers as strings' => ['10', 10],
@@ -203,7 +203,7 @@ it('can check whether number is equal to', function (int $number, int $greaterTh
     '10 not equal to 15' => [10, 15, false],
 ]);
 
-it('can check whether number is zero', function (int $number, bool $result) {
+it('can check whether number is zero', function (int|float $number, bool $result) {
     expect(Number::of($number)->isZero())->toBe($result);
 })->with([
     '0 is zero' => [0, true],
@@ -252,7 +252,7 @@ it('can check whether number is positive or zero', function (int $number, bool $
     '-10000 is not positive or zero' => [-10000, false],
 ]);
 
-it('can check if equal to', function (int|string|float $number, int|string|float $comparison) {
+it('can check if equal to', function (mixed $number, mixed $comparison) {
     expect(Number::of($number)->isEqualTo(Number::of($comparison)))->toBe(true);
 })->with([
     '1 is 1' => [1, 1],
@@ -263,7 +263,7 @@ it('can check if equal to', function (int|string|float $number, int|string|float
     '-101.001 as string is -101.001' => ['-101.001', -101.001],
 ]);
 
-it('can get Number in cents', function (int|string|float $number, int $result) {
+it('can get Number in cents', function (mixed $number, int $result) {
     expect(Number::of($number)->inCents())->toBe($result);
 })->with([
     '1.00 as string is 1' => ['1.00', 100],
@@ -276,11 +276,14 @@ it('can get Number in cents', function (int|string|float $number, int $result) {
     '-1111111101.99 is -111111110199' => [-1111111101.99, -111111110199],
 ]);
 
-it('can specify the number of decimal places for division', function ($result, $expectedString, $expectedFloat) {
-    expect($result)
-        ->toString()->toBe($expectedString)
-        ->toFloat()->toBe($expectedFloat);
-})->with([
+it(
+    'can specify the number of decimal places for division',
+    function (Number $result, string $expectedString, float $expectedFloat) {
+        expect($result)
+            ->toString()->toBe($expectedString)
+            ->toFloat()->toBe($expectedFloat);
+    }
+)->with([
     [Number::of(20, RoundingMode::HALF_UP)->div(100), '0.20', 0.2],
     [Number::of(10.5, RoundingMode::HALF_UP)->div(2), '5.25', 5.25],
     [Number::of(5.2, RoundingMode::HALF_UP)->div(4.5, 3), '1.156', 1.156],

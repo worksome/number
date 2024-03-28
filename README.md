@@ -58,7 +58,7 @@ vendor/bin/pest -d --update-snapshots
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHub Releases](https://github.com/worksome/number/releases) for more information on what has changed recently.
 
 ## Credits
 
