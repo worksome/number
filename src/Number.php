@@ -83,7 +83,7 @@ class Number
         return static::of($this->value->dividedBy($value->value, $decimalPlaces, $this->getRoundingMode()));
     }
 
-    public function percentage(int|Number $value): Number
+    public function percentage(string|int|float|BigNumber|Number $value): Number
     {
         if (! $value instanceof Number) {
             $value = Number::of($value);
