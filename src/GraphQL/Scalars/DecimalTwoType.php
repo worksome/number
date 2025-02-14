@@ -22,11 +22,9 @@ final class DecimalTwoType extends ScalarType
     /**
      * @param string|int|float $value
      *
-     * @return float
-     *
      * @throws Error
      */
-    public function serialize($value)
+    public function serialize($value): float
     {
         return $this->parseValue($value)->toFloat();
     }
@@ -34,11 +32,9 @@ final class DecimalTwoType extends ScalarType
     /**
      * @param string|int|float $value
      *
-     * @return Number
-     *
      * @throws Error
      */
-    public function parseValue($value)
+    public function parseValue($value): Number
     {
         try {
             return Number::of($value);
@@ -47,7 +43,7 @@ final class DecimalTwoType extends ScalarType
         }
     }
 
-    public function parseLiteral(Node $valueNode, array|null $variables = null)
+    public function parseLiteral(Node $valueNode, array|null $variables = null): Number
     {
         if (! $valueNode instanceof IntValueNode && ! $valueNode instanceof FloatValueNode) {
             throw new Error('Query error: Can only parse integer or float. Got: ' . $valueNode->kind, [$valueNode]);

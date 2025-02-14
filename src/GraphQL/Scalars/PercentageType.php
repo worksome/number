@@ -26,33 +26,31 @@ final class PercentageType extends ScalarType
      *
      * @throws Error
      */
-    public function serialize($value)
+    public function serialize($value): float
     {
-        return $this->parseValue($value);
+        return $this->parseValue($value)->toFloat();
     }
 
     /**
      * @param string|int|float $value
      *
-     * @return float
-     *
      * @throws Error
      */
-    public function parseValue($value)
+    public function parseValue($value): Percentage
     {
         try {
-            return Percentage::of($value)->toFloat();
+            return Percentage::of($value);
         } catch (NumberException|NumberFormatException $exception) {
             throw new Error($exception->getMessage());
         }
     }
 
-    public function parseLiteral(Node $valueNode, array|null $variables = null)
+    public function parseLiteral(Node $valueNode, array|null $variables = null): Percentage
     {
         if (! $valueNode instanceof IntValueNode && ! $valueNode instanceof FloatValueNode) {
             throw new Error('Query error: Can only parse integer or float. Got: ' . $valueNode->kind, [$valueNode]);
         }
 
-        return Percentage::of($valueNode->value)->toFloat();
+        return Percentage::of($valueNode->value);
     }
 }
