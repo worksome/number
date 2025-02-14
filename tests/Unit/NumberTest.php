@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Brick\Math\BigDecimal;
-use Brick\Math\RoundingMode;
 use Pest\Expectation;
 use Worksome\Number\Number;
 
@@ -270,8 +269,8 @@ it(
             ->toFloat()->toBe($expectedFloat);
     }
 )->with([
-    [Number::of(20, RoundingMode::HALF_UP)->div(100), '0.20', 0.2],
-    [Number::of(10.5, RoundingMode::HALF_UP)->div(2), '5.25', 5.25],
-    [Number::of(5.2, RoundingMode::HALF_UP)->div(4.5, 3), '1.156', 1.156],
-    [Number::of(4.1234, RoundingMode::HALF_UP)->div(2.2, 3), '1.874', 1.874],
+    [Number::of(20)->div(100), '0.20', 0.2],
+    [Number::of(10.5)->div(2), '5.25', 5.25],
+    [Number::of(5.2)->div(4.5, 3), '1.156', 1.156],
+    [Number::of(4.1234)->div(2.2, 3), '1.874', 1.874],
 ]);
