@@ -60,7 +60,9 @@ it('configures the correct bindings for decimals', function ($value, int $bindin
 class TestMoneyAsCents extends Model
 {
     public $table = 'test_money';
+
     public $timestamps = false;
+
     protected $guarded = [];
 
     public $casts = [

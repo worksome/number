@@ -58,7 +58,9 @@ it('configures the correct bindings for decimals', function ($value, string $bin
 class TestMoneyAsDecimal extends Model
 {
     public $table = 'test_money';
+
     public $timestamps = false;
+
     protected $guarded = [];
 
     public $casts = [
