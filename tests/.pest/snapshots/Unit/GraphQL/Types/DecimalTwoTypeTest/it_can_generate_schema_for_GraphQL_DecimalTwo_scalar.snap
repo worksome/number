@@ -1,0 +1,2 @@
+"The `DecimalTwo` scalar type represents a number with 2 decimal places."
+scalar DecimalTwo
