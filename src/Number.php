@@ -7,44 +7,25 @@ namespace Worksome\Number;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
-use InvalidArgumentException;
 
 class Number
 {
-    protected const ALLOWED_ROUNDING_MODES = [
-        RoundingMode::UNNECESSARY, RoundingMode::UP, RoundingMode::DOWN, RoundingMode::HALF_UP, RoundingMode::HALF_DOWN,
-        RoundingMode::HALF_CEILING, RoundingMode::HALF_FLOOR, RoundingMode::HALF_EVEN,
-    ];
-
-    final protected function __construct(protected BigDecimal $value, protected int $roundingMode)
+    final protected function __construct(protected BigDecimal $value)
     {
         $this->validate();
     }
 
-    /** @see RoundingMode for available rounding mode constants */
-    public static function of(string|int|float|BigNumber|Number $value, ?int $roundingMode = null): static
+    public static function of(string|int|float|BigNumber|Number $value): static
     {
-        if ($value instanceof Number && $roundingMode === null) {
-            $roundingMode = $value->getRoundingMode();
-        }
-
-        if ($roundingMode === null) {
-            $roundingMode = RoundingMode::HALF_EVEN;
-        }
-
-        if (! in_array($roundingMode, self::ALLOWED_ROUNDING_MODES)) {
-            throw new InvalidArgumentException("An invalid rounding mode \"{$roundingMode}\" was provided");
-        }
-
         if ($value instanceof BigNumber) {
-            return new static($value->toBigDecimal(), $roundingMode);
+            return new static($value->toBigDecimal());
         }
 
         if ($value instanceof Number) {
-            return new static($value->getValue(), $roundingMode);
+            return new static($value->getValue());
         }
 
-        return new static(BigDecimal::of($value), $roundingMode);
+        return new static(BigDecimal::of($value));
     }
 
     public function add(string|int|float|BigNumber|Number $value): Number
@@ -80,7 +61,7 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->dividedBy($value->value, $decimalPlaces, $this->getRoundingMode()));
+        return static::of($this->value->dividedBy($value->value, $decimalPlaces, RoundingMode::HALF_UP));
     }
 
     public function percentage(string|int|float|BigNumber|Number $value): Number
@@ -172,11 +153,6 @@ class Number
         return $this->value;
     }
 
-    public function getRoundingMode(): int
-    {
-        return $this->roundingMode;
-    }
-
     public function toString(): string
     {
         return (string) $this->value;
@@ -190,6 +166,15 @@ class Number
     public function inCents(): int
     {
         return $this->mul(100)->getValue()->toInt();
+    }
+
+    public function format(int $decimals, bool $europeanStyle = false): string
+    {
+        if ($europeanStyle) {
+            return number_format($this->toFloat(), $decimals, ',', '.');
+        }
+
+        return number_format($this->toFloat(), $decimals);
     }
 
     public function __toString(): string
