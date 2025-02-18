@@ -31,15 +31,13 @@ echo $number; // 500
 
 This package also provides GraphQL scalar types for the [WebOnyx GraphQL PHP package](https://github.com/webonyx/graphql-php) / [Lighthouse](https://lighthouse-php.com).
 
-These should be auto-registered by [`Worksome\Number\Providers\NumberServiceProvider`](./src/Providers/NumberServiceProvider.php), however if you want to do this manually, they can be registered in the type registry using:
+These will be auto-registered by [`Worksome\Number\Providers\NumberServiceProvider`](src/Providers/NumberServiceProvider.php), however if you want to do this manually, they can be registered in the type registry using:
 
 ```php
-use Worksome\Number\GraphQL\Scalars\PercentageType;
-use Worksome\Number\GraphQL\Scalars\StrictPercentageType;
-
 // In Lighthouse (https://lighthouse-php.com)
-$typeRegistry->register(new PercentageType());
-$typeRegistry->register(new StrictPercentageType());
+$typeRegistry->register(new \Worksome\Number\GraphQL\Scalars\DecimalTwoType());
+$typeRegistry->register(new \Worksome\Number\GraphQL\Scalars\PercentageType());
+$typeRegistry->register(new \Worksome\Number\GraphQL\Scalars\StrictPercentageType());
 ```
 
 ## Testing
