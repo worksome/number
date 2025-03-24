@@ -122,6 +122,10 @@ it(
     'integers' => [500, 10, 50],
 ]);
 
+it('can round numbers', function () {
+    expect(Number::of('10.1001')->round(2)->getValue())->toEqual(BigDecimal::of('10.10'));
+});
+
 it('can negate numbers', function (mixed $number, mixed $result) {
     expect(Number::of($number)->negate()->getValue())->toEqual(BigDecimal::of($result));
 })->with([
