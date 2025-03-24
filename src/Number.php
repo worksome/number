@@ -64,6 +64,11 @@ class Number
         return static::of($this->value->dividedBy($value->value, $decimalPlaces, RoundingMode::HALF_UP));
     }
 
+    public function round(int $scale): Number
+    {
+        return static::of($this->value->toScale($scale, RoundingMode::HALF_UP));
+    }
+
     public function percentage(string|int|float|BigNumber|Number $value): Number
     {
         if (! $value instanceof Number) {
