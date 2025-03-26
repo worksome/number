@@ -1,5 +1,6 @@
 includes:
     - ./vendor/worksome/coding-style/larastan.neon
+    - phpstan-baseline.neon
 
 parameters:
     level: max
@@ -10,3 +11,9 @@ parameters:
     checkModelProperties: true
     parallel:
             processTimeout: 300.0
+
+    ignoreErrors:
+      -
+        identifier: larastan.noEnvCallsOutsideOfConfig
+        path: config
+        reportUnmatched: false
