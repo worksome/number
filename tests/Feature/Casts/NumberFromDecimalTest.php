@@ -54,6 +54,15 @@ it('configures the correct bindings for decimals', function ($value, string $bin
     ['9999999999.99', '9999999999.99'],
 ]);
 
+it('supports null values', function () {
+    $money = TestMoneyAsDecimal::create([
+        'value' => Number::of(123),
+    ]);
+    $money->value = null;
+
+    expect($money->value)->toBeNull();
+});
+
 /** @property Number $value */
 class TestMoneyAsDecimal extends Model
 {

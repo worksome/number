@@ -11,15 +11,23 @@ use Worksome\Number\Number;
 /** @implements CastsAttributes<Number, Number> */
 class NumberFromCents implements CastsAttributes
 {
-    /** @param int $value */
+    /** @param int|null $value */
     public function get($model, string $key, $value, array $attributes)
     {
+        if ($value === null) {
+            return null;
+        }
+
         return Number::of($value)->div(100);
     }
 
-    /** @param Number $value */
+    /** @param Number|null $value */
     public function set($model, string $key, $value, array $attributes)
     {
+        if ($value === null) {
+            return null;
+        }
+
         // @phpstan-ignore instanceof.alwaysTrue (we type hint `Number` as it should be one, but there's still a possibility that it isn't.)
         if (! $value instanceof Number) {
             throw ValueIsNotANumberException::fromCents();
