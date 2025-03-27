@@ -56,6 +56,15 @@ it('configures the correct bindings for decimals', function ($value, int $bindin
     ['1', 100],
 ]);
 
+it('supports null values', function () {
+    $money = TestMoneyAsCents::create([
+        'value' => Number::of(123),
+    ]);
+    $money->value = null;
+
+    expect($money->value)->toBeNull();
+});
+
 /** @property Number $value */
 class TestMoneyAsCents extends Model
 {

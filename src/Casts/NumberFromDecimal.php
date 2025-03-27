@@ -18,15 +18,23 @@ class NumberFromDecimal implements CastsAttributes
     ) {
     }
 
-    /** @param  float|string  $value */
+    /** @param  float|string|null  $value */
     public function get($model, string $key, $value, array $attributes)
     {
+        if ($value === null) {
+            return null;
+        }
+
         return Number::of($value);
     }
 
-    /** @param  Number  $value */
+    /** @param  Number|null  $value */
     public function set($model, string $key, $value, array $attributes)
     {
+        if ($value === null) {
+            return null;
+        }
+
         // @phpstan-ignore instanceof.alwaysTrue (we type hint `Number` as it should be one, but there's still a possibility that it isn't.)
         if (! $value instanceof Number) {
             throw ValueIsNotANumberException::fromDecimal();
