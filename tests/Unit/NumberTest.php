@@ -275,6 +275,26 @@ it(
 )->with([
     [Number::of(20)->div(100), '0.20', 0.2],
     [Number::of(10.5)->div(2), '5.25', 5.25],
-    [Number::of(5.2)->div(4.5, 3), '1.156', 1.156],
-    [Number::of(4.1234)->div(2.2, 3), '1.874', 1.874],
+    [Number::of(5.2, 3)->div(4.5), '1.156', 1.156],
+    [Number::of(4.1234, 4)->div(2.2)->round(3), '1.8740', 1.874],
+]);
+
+it('can get current number of decimals', function (Number $number, int $result) {
+    expect($number->getCurrentDecimalCount())->toBe($result);
+})->with([
+    [Number::of('10'), 0],
+    [Number::of('10.0'), 0],
+    [Number::of('10.00'), 0],
+    [Number::of('10.01'), 2],
+    [Number::of('10.1'), 1],
+    [Number::of('10.123456'), 6],
+]);
+
+it('can get max number of decimals', function (Number $number, int $result) {
+    expect($number->getMaxDecimalCount())->toBe($result);
+})->with([
+    [Number::of('10'), 0],
+    [Number::of('10.0'), 1],
+    [Number::of('10.00'), 2],
+    [Number::of('10.123456'), 6],
 ]);

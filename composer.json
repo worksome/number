@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "brick/math": "^0.9.3 || ^0.10 || ^0.11 || ^0.12",
         "nuwave/lighthouse": "^6.54",
         "webonyx/graphql-php": "^15.19"
@@ -39,6 +39,11 @@
         }
     },
     "scripts": {
+        "ecs": "vendor/bin/ecs",
+        "ecs:fix": "vendor/bin/ecs --fix",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "phpstan:baseline": "vendor/bin/phpstan analyse --generate-baseline",
+        "phpstan-ci": "vendor/bin/phpstan analyse --error-format=github",
         "lint": "vendor/bin/ecs --fix",
         "test:unit": "vendor/bin/pest -p",
         "test:coverage": "vendor/bin/pest -p --coverage",
