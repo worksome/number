@@ -10,6 +10,8 @@ use Brick\Math\RoundingMode;
 
 class Number
 {
+    protected int|null $decimals = null;
+
     final protected function __construct(protected BigDecimal $value)
     {
         $this->validate();
@@ -34,7 +36,9 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->plus($value->value));
+        return $this->roundToConfiguredDecimals(
+            static::of($this->value->plus($value->value))
+        );
     }
 
     public function sub(string|int|float|BigNumber|Number $value): Number
@@ -43,7 +47,9 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->minus($value->value));
+        return $this->roundToConfiguredDecimals(
+            static::of($this->value->minus($value->value))
+        );
     }
 
     public function mul(string|int|float|BigNumber|Number $value): Number
@@ -52,7 +58,9 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->multipliedBy($value->value));
+        return $this->roundToConfiguredDecimals(
+            static::of($this->value->multipliedBy($value->value))
+        );
     }
 
     public function div(string|int|float|BigNumber|Number $value, int $decimalPlaces = 2): Number
@@ -61,7 +69,9 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->dividedBy($value->value, $decimalPlaces, RoundingMode::HALF_UP));
+        return $this->roundToConfiguredDecimals(
+            static::of($this->value->dividedBy($value->value))
+        );
     }
 
     public function round(int $scale): Number
@@ -189,5 +199,14 @@ class Number
 
     protected function validate(): void
     {
+    }
+
+    private function roundToConfiguredDecimals(Number $value): static
+    {
+        if ($this->decimals !== null) {
+            return $value->round($this->decimals);
+        }
+
+        return $value;
     }
 }
