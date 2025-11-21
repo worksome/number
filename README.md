@@ -27,6 +27,35 @@ $number->mul(Number::of(5));
 echo $number; // 500
 ```
 
+## Casting
+This package allows you to easily cast attributes on your Eloquent models to number types.
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use Worksome\Number\Casts\NumberFromCents;
+use Worksome\Number\Casts\NumberFromDecimal;
+use Worksome\Number\MonetaryAmount;
+use Worksome\Number\Percentage;
+use Worksome\Number\Number;
+
+class Product extends Model
+{
+    protected $casts = [
+        'a' => NumberFromCents::class,
+        'b' => NumberFromDecimal::class,
+        'c' => NumberFromDecimal::using(2, MonetaryAmount::class), // Cast to a specialised Number-class
+        'd' => NumberFromDecimal::using(2, Percentage::class), // Cast to a specialised Number-class
+        'e' => NumberFromDecimal::using(3), // Three decimal places - default is 2
+    ];
+}
+```
+
+## Available Number Types
+The following Number types are available out of the box:
+- `Number` - The base number type, with two decimal places. Can be configured to use a different default scale.
+- `MonetaryAmount` - A number type for handling monetary amounts. Always uses two decimal places. Rounds automatically in all operations.
+- `Percentage` - A number type for handling percentages. Makes it clear that the number represents a percentage, not an amount. Adds % on to string representations.
+
 ### GraphQL
 
 This package also provides GraphQL scalar types for the [WebOnyx GraphQL PHP package](https://github.com/webonyx/graphql-php) / [Lighthouse](https://lighthouse-php.com).

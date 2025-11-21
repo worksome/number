@@ -5,46 +5,63 @@ declare(strict_types=1);
 namespace Worksome\Number\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Worksome\Number\Exceptions\ValueIsNotANumberException;
+use Worksome\Number\Exceptions\ValueTypeMismatchException;
 use Worksome\Number\Number;
 
-/** @implements CastsAttributes<Number, Number> */
+/**
+ * @template TClass of Number
+ *
+ * @implements CastsAttributes<Number, Number>
+ */
 class NumberFromDecimal implements CastsAttributes
 {
+    /** @param class-string<TClass> $class */
     public function __construct(
         private int $decimals = 2,
-        private string $decimalSeparator = '.',
-        private string $thousandsSeparator = '',
+        private string $class = Number::class,
     ) {
     }
 
-    /** @param  float|string|null  $value */
+    /** @param class-string<Number> $class */
+    public static function using(
+        int $decimals = 2,
+        string $class = Number::class,
+    ): string {
+        return static::class . ':' . implode(',', func_get_args());
+    }
+
+    /**
+     * @param float|string|null $value
+     *
+     * @return TClass|null
+     */
     public function get($model, string $key, $value, array $attributes)
     {
         if ($value === null) {
             return null;
         }
 
-        return Number::of($value);
+        return ($this->class)::of($value, $this->decimals);
     }
 
-    /** @param  Number|null  $value */
+    /** @param  TClass|null  $value */
     public function set($model, string $key, $value, array $attributes)
     {
         if ($value === null) {
             return null;
         }
 
-        // @phpstan-ignore instanceof.alwaysTrue (we type hint `Number` as it should be one, but there's still a possibility that it isn't.)
-        if (! $value instanceof Number) {
-            throw ValueIsNotANumberException::fromDecimal();
+        if (! $value instanceof $this->class) {
+            throw ValueTypeMismatchException::fromDecimal(
+                class_basename($this->class),
+            );
         }
 
         return number_format(
             $value->getValue()->toFloat(),
             $this->decimals,
-            $this->decimalSeparator,
-            $this->thousandsSeparator,
+            '.',
+            '',
         );
     }
 }
