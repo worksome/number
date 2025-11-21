@@ -22,11 +22,11 @@
         "webonyx/graphql-php": "^15.19"
     },
     "require-dev": {
-        "larastan/larastan": "^3.1",
-        "nunomaduro/collision": "^7.10 || ^8.1.1",
-        "orchestra/testbench": "^9.12 || ^10.1",
-        "pestphp/pest": "^3.7",
-        "worksome/coding-style": "^3.2"
+        "larastan/larastan": "^3.8",
+        "nunomaduro/collision": "^8.8.3",
+        "orchestra/testbench": "^10.7",
+        "pestphp/pest": "^4.1",
+        "worksome/coding-style": "^3.3"
     },
     "autoload": {
         "psr-4": {
