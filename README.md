@@ -1,8 +1,8 @@
 # Number
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/number.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/worksome/number)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/number/run-tests.yml?branch=main&label=Tests&style=flat-square)](https://github.com/worksome/number/actions?query=workflow%3ATests)
-[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/worksome/number/phpstan.yml?branch=main&label=PHPStan&style=flat-square)](https://github.com/worksome/number/actions?query=workflow%3APHPStan)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/number/tests.yml?branch=main&label=Tests&style=flat-square)](https://github.com/worksome/number/actions?query=workflow%3ATests)
+[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/worksome/number/static.yml?branch=main&label=Static%20Analysis&style=flat-square)](https://github.com/worksome/number/actions?query=workflow%3AStatic%20Analysis)
 [![Total Downloads](https://img.shields.io/packagist/dt/worksome/number.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/worksome/number)
 
 A package for handling numbers in Laravel.
