@@ -12,7 +12,7 @@ class Number
 {
     protected int|null $decimals = null;
 
-    protected RoundingMode $roundingMode = RoundingMode::HALF_UP;
+    protected RoundingMode $roundingMode = RoundingMode::HalfUp;
 
     final protected function __construct(
         protected BigDecimal $value,
@@ -35,7 +35,7 @@ class Number
             return new static($value->getValue(), $decimals);
         }
 
-        return new static(BigDecimal::of($value), $decimals);
+        return new static(BigDecimal::of((string) $value), $decimals);
     }
 
     public function add(string|int|float|BigNumber|Number $value): static
@@ -96,7 +96,7 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->exactlyDividedBy(100)->multipliedBy($value->value), $this->decimals);
+        return static::of($this->value->dividedByExact(100)->multipliedBy($value->value), $this->decimals);
     }
 
     public function negate(): static
