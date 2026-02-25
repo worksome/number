@@ -17,16 +17,16 @@
     ],
     "require": {
         "php": "^8.4",
-        "brick/math": "^0.12 || ^0.13 || ^0.14",
-        "nuwave/lighthouse": "^6.54",
-        "webonyx/graphql-php": "^15.19"
+        "brick/math": "^0.14",
+        "nuwave/lighthouse": "^6.65",
+        "webonyx/graphql-php": "^15.30"
     },
     "require-dev": {
-        "larastan/larastan": "^3.8",
-        "nunomaduro/collision": "^8.8.3",
-        "orchestra/testbench": "^10.7",
-        "pestphp/pest": "^4.1",
-        "worksome/coding-style": "^3.3"
+        "larastan/larastan": "^3.9",
+        "nunomaduro/collision": "^8.9",
+        "orchestra/testbench": "^10.9",
+        "pestphp/pest": "^4.4",
+        "worksome/coding-style": "^3.4"
     },
     "autoload": {
         "psr-4": {

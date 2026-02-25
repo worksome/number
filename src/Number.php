@@ -35,7 +35,7 @@ class Number
             return new static($value->getValue(), $decimals);
         }
 
-        return new static(BigDecimal::of($value), $decimals);
+        return new static(BigDecimal::of((string) $value), $decimals);
     }
 
     public function add(string|int|float|BigNumber|Number $value): static
