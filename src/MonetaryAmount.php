@@ -15,5 +15,11 @@ class MonetaryAmount extends Number
         if ($this->decimals !== 2) {
             throw new MonetaryAmountDecimalCountException();
         }
+
+        if ($this->value->getScale() > 2) {
+            throw new MonetaryAmountDecimalCountException(
+                "MonetaryAmount value '{$this->value}' must have exactly 2 decimal places.",
+            );
+        }
     }
 }
