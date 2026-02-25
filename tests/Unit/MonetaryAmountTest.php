@@ -10,14 +10,14 @@ use Worksome\Number\Number;
 it('can instantiate a MonetaryAmount from values', function (mixed $value) {
     expect(MonetaryAmount::of($value))->toBeInstanceOf(MonetaryAmount::class);
 })->with([
-    '`10.00` as string' => '10.00',
-    '`1.99` as string' => '1.99',
-    '`0.01` as string' => '0.01',
-    '`100` as int' => 100,
-    '`10` as int' => 10,
-    '`99.99` as float' => 99.99,
-    '`10.00` as BigDecimal' => BigDecimal::of('10.00'),
-    '`1.99` as MonetaryAmount' => MonetaryAmount::of('1.99'),
+    '`10.00` as string' => ['10.00'],
+    '`1.99` as string' => ['1.99'],
+    '`0.01` as string' => ['0.01'],
+    '`100` as int' => [100],
+    '`10` as int' => [10],
+    '`99.99` as float' => [99.99],
+    '`10.00` as BigDecimal' => [BigDecimal::of('10.00')],
+    '`1.99` as MonetaryAmount' => [MonetaryAmount::of('1.99')],
 ]);
 
 it('automatically rounds to 2 decimal places', function (mixed $value, string $expected) {
