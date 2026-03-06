@@ -20,15 +20,6 @@ it('can instantiate a MonetaryAmount from values', function (mixed $value) {
     '`1.99` as MonetaryAmount' => [MonetaryAmount::of('1.99')],
 ]);
 
-it('automatically rounds to 2 decimal places', function (mixed $value, string $expected) {
-    expect(MonetaryAmount::of($value)->toString())->toBe($expected);
-})->with([
-    'rounds down' => ['10.124', '10.12'],
-    'rounds up' => ['10.125', '10.13'],
-    'three decimals' => ['10.999', '11.00'],
-    'many decimals' => ['10.123456789', '10.12'],
-]);
-
 it('rounds arithmetic operations to 2 decimal places', function () {
     $amount = MonetaryAmount::of('10.00');
 
@@ -62,6 +53,7 @@ it('can multiply monetary amounts', function (mixed $amount, mixed $multiplier, 
     'multiply by decimal' => ['10.00', '1.5', '15.00'],
     'multiply by cents' => ['99.99', 2, '199.98'],
     'multiply with rounding' => ['10.00', '0.333', '3.33'],
+    'rounds automatically' => ['2.50', '3.35', '8.38'],
 ]);
 
 it('can divide monetary amounts', function (mixed $amount, mixed $divisor, string $expected) {
@@ -91,7 +83,7 @@ it('can negate monetary amounts', function (mixed $amount, string $expected) {
 ]);
 
 it('can round monetary amounts', function () {
-    $amount = MonetaryAmount::of('10.1299');
+    $amount = MonetaryAmount::of('10.13');
 
     expect($amount->round(2)->toString())->toBe('10.13');
     expect($amount->round(1)->toString())->toBe('10.10');
@@ -158,16 +150,16 @@ it('can format monetary amounts', function (mixed $amount, int $decimals, string
     expect(MonetaryAmount::of($amount)->format($decimals))->toBe($expected);
 })->with([
     '2 decimals' => ['1234.56', 2, '1,234.56'],
+    '1 decimals' => ['1234.5', 2, '1,234.50'],
     '0 decimals' => ['1234.56', 0, '1,235'],
-    '3 decimals' => ['1234.567', 3, '1,234.567'],
 ]);
 
 it('can format monetary amounts in European style', function (mixed $amount, int $decimals, string $expected) {
     expect(MonetaryAmount::of($amount)->format($decimals, true))->toBe($expected);
 })->with([
     '2 decimals' => ['1234.56', 2, '1.234,56'],
+    '1 decimal' => ['1234.5', 2, '1.234,50'],
     '0 decimals' => ['1234.56', 0, '1.235'],
-    '3 decimals' => ['1234.567', 3, '1.234,567'],
 ]);
 
 it('can convert to string', function (mixed $amount, string $expected) {
@@ -230,7 +222,6 @@ it('handles edge cases', function (mixed $amount, string $expected) {
     expect(MonetaryAmount::of($amount)->toString())->toBe($expected);
 })->with([
     'zero' => ['0', '0.00'],
-    'very small amount' => ['0.001', '0.00'],
     'very large amount' => ['999999999.99', '999999999.99'],
     'scientific notation' => ['1e2', '100.00'],
 ]);
@@ -239,4 +230,10 @@ it('throw if not using two decimal places', function () {
     $this->expectException(MonetaryAmountDecimalCountException::class);
 
     MonetaryAmount::of('10.12', 3);
+});
+
+it('throw if not using value with two decimal places', function () {
+    $this->expectException(MonetaryAmountDecimalCountException::class);
+
+    MonetaryAmount::of('10.123');
 });
