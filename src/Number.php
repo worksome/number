@@ -44,9 +44,7 @@ class Number
             $value = Number::of($value);
         }
 
-        return $this->roundToConfiguredDecimals(
-            static::of($this->value->plus($value->value), $this->decimals)
-        );
+        return $this->newInstanceWithValue($this->value->plus($value->value));
     }
 
     public function sub(string|int|float|BigNumber|Number $value): static
@@ -55,9 +53,7 @@ class Number
             $value = Number::of($value);
         }
 
-        return $this->roundToConfiguredDecimals(
-            static::of($this->value->minus($value->value), $this->decimals)
-        );
+        return $this->newInstanceWithValue($this->value->minus($value->value));
     }
 
     public function mul(string|int|float|BigNumber|Number $value): static
@@ -66,8 +62,8 @@ class Number
             $value = Number::of($value);
         }
 
-        return $this->roundToConfiguredDecimals(
-            static::of($this->value->multipliedBy($value->value), $this->decimals)
+        return $this->newInstanceWithValue(
+            $this->value->multipliedBy($value->value->strippedOfTrailingZeros())
         );
     }
 
@@ -77,12 +73,13 @@ class Number
             $value = Number::of($value);
         }
 
-        return $this->roundToConfiguredDecimals(
-            static::of(
-                $this->value->dividedBy($value->value, scale: $this->decimals ?? 2, roundingMode: $this->roundingMode),
-                $this->decimals
-            )
+        $result = $this->value->dividedBy(
+            $value->value,
+            scale: $this->decimals ?? 2,
+            roundingMode: $this->roundingMode
         );
+
+        return $this->newInstanceWithValue($result);
     }
 
     public function round(int $scale): static
@@ -96,7 +93,9 @@ class Number
             $value = Number::of($value);
         }
 
-        return static::of($this->value->dividedByExact(100)->multipliedBy($value->value), $this->decimals);
+        return $this->newInstanceWithValue(
+            $this->value->dividedByExact(100)->multipliedBy($value->value)
+        );
     }
 
     public function negate(): static
@@ -235,6 +234,20 @@ class Number
 
     protected function validate(): void
     {
+    }
+
+    /**
+     * Create a new instance with the given value, rounded to configured decimals when set.
+     * This ensures MonetaryAmount (and other fixed-decimal types) never receive a value
+     * with more decimal places than allowed, e.g. "15.0000" from add/mul becomes "15.00".
+     */
+    private function newInstanceWithValue(BigDecimal $value): static
+    {
+        if ($this->decimals !== null) {
+            $value = $value->toScale($this->decimals, $this->roundingMode);
+        }
+
+        return static::of($value, $this->decimals);
     }
 
     private function roundToConfiguredDecimals(Number $value): static
