@@ -94,7 +94,7 @@ class Number
         }
 
         return $this->newInstanceWithValue(
-            $this->value->dividedByExact(100)->multipliedBy($value->value)
+            $this->value->dividedByExact('100')->multipliedBy($value->value)
         );
     }
 
@@ -173,6 +173,18 @@ class Number
         return $this->value->isPositiveOrZero();
     }
 
+    /** @param iterable<static> $values */
+    public static function sum(iterable $values): static
+    {
+        $sum = static::of('0');
+
+        foreach ($values as $value) {
+            $sum = $sum->add($value);
+        }
+
+        return $sum;
+    }
+
     public function getValue(): BigDecimal
     {
         return $this->value;
@@ -190,7 +202,7 @@ class Number
 
     public function inCents(): int
     {
-        return $this->mul(100)->getValue()->toInt();
+        return $this->mul('100')->getValue()->toInt();
     }
 
     /**
