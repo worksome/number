@@ -25,7 +25,8 @@ class NumberFromCents implements CastsAttributes
     public static function using(
         string $class = Number::class,
     ): string {
-        return static::class . ':' . implode(',', func_get_args());
+        // @phpstan-ignore argument.type
+        return static::class . ':' . implode(',', array_map(fn ($value) => strval($value), func_get_args()));
     }
 
     /**
