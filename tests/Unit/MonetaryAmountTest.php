@@ -237,3 +237,13 @@ it('throw if not using value with two decimal places', function () {
 
     MonetaryAmount::of('10.123');
 });
+
+it('can get sum of monetary amounts', function () {
+    $sum = MonetaryAmount::sum([
+        MonetaryAmount::of('1.00'),
+        MonetaryAmount::of('1.00'),
+        MonetaryAmount::of('1.00'),
+    ]);
+
+    expect($sum)->toEqual(MonetaryAmount::of('3.00'));
+});

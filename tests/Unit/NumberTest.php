@@ -298,3 +298,13 @@ it('can get max number of decimals', function (Number $number, int $result) {
     [Number::of('10.00'), 2],
     [Number::of('10.123456'), 6],
 ]);
+
+it('can get sum of numbers', function () {
+    $sum = Number::sum([
+        Number::of('1'),
+        Number::of('1'),
+        Number::of('1'),
+    ]);
+
+    expect($sum)->toEqual(Number::of('3'));
+});
