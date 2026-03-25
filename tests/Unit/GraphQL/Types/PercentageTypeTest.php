@@ -6,7 +6,7 @@ use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\PercentageType as Percentage;
 
 it('can serialize', function ($value, $expected) {
-    $serialized = (new Percentage())->serialize($value);
+    $serialized = new Percentage()->serialize($value);
 
     expect($serialized)->toBeFloat()->toBe($expected);
 })->with([

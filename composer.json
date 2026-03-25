@@ -11,19 +11,19 @@
     "authors": [
         {
             "name": "Owen Voke",
-            "email": "owen.voke@worksome.com",
+            "email": "owen@worksome.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.4",
         "brick/math": "^0.14",
-        "nuwave/lighthouse": "^6.65",
         "webonyx/graphql-php": "^15.30"
     },
     "require-dev": {
         "larastan/larastan": "^3.9",
         "nunomaduro/collision": "^8.9",
+        "nuwave/lighthouse": "^6.65",
         "orchestra/testbench": "^10.9",
         "pestphp/pest": "^4.4",
         "worksome/coding-style": "^3.4"

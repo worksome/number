@@ -51,7 +51,9 @@ class Product extends Model
 ```
 
 ## Available Number Types
+
 The following Number types are available out of the box:
+
 - `Number` - The base number type, with two decimal places. Can be configured to use a different default scale.
 - `MonetaryAmount` - A number type for handling monetary amounts. Always uses two decimal places. Rounds automatically in all operations.
 - `Percentage` - A number type for handling percentages. Makes it clear that the number represents a percentage, not an amount. Adds % on to string representations.
@@ -60,7 +62,7 @@ The following Number types are available out of the box:
 
 This package also provides GraphQL scalar types for the [WebOnyx GraphQL PHP package](https://github.com/webonyx/graphql-php) / [Lighthouse](https://lighthouse-php.com).
 
-These will be auto-registered by [`Worksome\Number\Providers\NumberServiceProvider`](src/Providers/NumberServiceProvider.php), however if you want to do this manually, they can be registered in the type registry using:
+These will be auto-registered for Lighthouse by [`Worksome\Number\Providers\NumberServiceProvider`](src/Providers/NumberServiceProvider.php). However, if you want to do this manually, they can be registered in the type registry using:
 
 ```php
 // In Lighthouse (https://lighthouse-php.com)
