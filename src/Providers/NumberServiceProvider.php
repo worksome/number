@@ -14,6 +14,10 @@ class NumberServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        if (! class_exists(TypeRegistry::class)) {
+            return;
+        }
+
         $this->callAfterResolving(TypeRegistry::class, function (TypeRegistry $registry) {
             $registry->register(new DecimalTwoType());
             $registry->register(new PercentageType());

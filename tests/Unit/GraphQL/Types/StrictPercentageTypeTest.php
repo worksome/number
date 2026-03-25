@@ -7,7 +7,7 @@ use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\StrictPercentageType as StrictPercentage;
 
 it('can serialize', function ($value, $expected) {
-    $serialized = (new StrictPercentage())->serialize($value);
+    $serialized = new StrictPercentage()->serialize($value);
 
     expect($serialized)->toBeFloat()->toBe($expected);
 })->with([
@@ -17,7 +17,7 @@ it('can serialize', function ($value, $expected) {
 ]);
 
 it('throws an error with invalid value', function ($value) {
-    (new StrictPercentage())->serialize($value);
+    new StrictPercentage()->serialize($value);
 })->throws(Error::class)->with([
     'less than 0' => -1,
     'greater than 100' => 101,

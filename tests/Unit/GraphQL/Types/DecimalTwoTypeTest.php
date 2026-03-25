@@ -6,7 +6,7 @@ use GraphQL\Utils\SchemaPrinter;
 use Worksome\Number\GraphQL\Scalars\DecimalTwoType as DecimalTwo;
 
 it('can serialize', function ($value, $expected) {
-    $serialized = (new DecimalTwo())->serialize($value);
+    $serialized = new DecimalTwo()->serialize($value);
 
     expect($serialized)->toBeFloat()->toBe($expected);
 })->with([

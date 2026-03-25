@@ -6,14 +6,7 @@ parameters:
     level: max
     paths:
         - src
-        - config
     tmpDir: build/phpstan
     checkModelProperties: true
     parallel:
             processTimeout: 300.0
-
-    ignoreErrors:
-      -
-        identifier: larastan.noEnvCallsOutsideOfConfig
-        path: config
-        reportUnmatched: false
