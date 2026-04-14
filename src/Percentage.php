@@ -8,7 +8,9 @@ class Percentage extends Number
 {
     public function toString(): string
     {
-        return "{$this->value}%";
+        $value = parent::toString();
+
+        return "{$value}%";
     }
 
     public function __toString(): string
