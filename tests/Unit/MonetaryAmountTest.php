@@ -136,6 +136,16 @@ it('can check sign of monetary amounts', function () {
     expect($negative->isPositiveOrZero())->toBeFalse();
 });
 
+it('can convert from cents', function (int $amount, MonetaryAmount $expected) {
+    expect(MonetaryAmount::fromCents($amount)->format(2))->toEqual($expected->format(2));
+})->with([
+    '100 cents is 1.00' => [100, MonetaryAmount::of(1.00)],
+    '1050 cents is 10.50 cents' => [1050, MonetaryAmount::of(10.50)],
+    '9999 cents is 99.99 cents' => [9999, MonetaryAmount::of(99.99)],
+    '1 cents is 0.01' => [1, MonetaryAmount::of(0.01)],
+    '-550 cents is -5.50' => [-550, MonetaryAmount::of(-5.50)],
+]);
+
 it('can convert to cents', function (mixed $amount, int $expected) {
     expect(MonetaryAmount::of($amount)->toCents())->toBe($expected);
 })->with([
