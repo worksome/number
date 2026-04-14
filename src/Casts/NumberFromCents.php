@@ -56,6 +56,7 @@ class NumberFromCents implements CastsAttributes
             );
         }
 
+        // @phpstan-ignore method.deprecated (This class will be changed to only support subclasses of `MonetaryAmount`)
         return $value->inCents();
     }
 }

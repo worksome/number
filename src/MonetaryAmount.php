@@ -22,4 +22,9 @@ class MonetaryAmount extends Number
             );
         }
     }
+
+    public function toCents(): int
+    {
+        return $this->mul('100')->getValue()->toInt();
+    }
 }
