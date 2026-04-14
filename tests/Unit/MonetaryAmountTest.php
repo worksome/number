@@ -112,28 +112,32 @@ it('can compare monetary amounts', function () {
 });
 
 it('can check sign of monetary amounts', function () {
-    $positive = MonetaryAmount::of('10.00');
-    $negative = MonetaryAmount::of('-10.00');
     $zero = MonetaryAmount::of('0.00');
 
-    expect($zero->isZero())->toBeTrue();
-    expect($positive->isZero())->toBeFalse();
+    expect($zero)
+        ->isZero()->toBeTrue()
+        ->isNegative()->toBeFalse()
+        ->isNegativeOrZero()->toBeTrue()
+        ->isPositive()->toBeFalse()
+        ->isPositiveOrZero()->toBeTrue();
 
-    expect($negative->isNegative())->toBeTrue();
-    expect($positive->isNegative())->toBeFalse();
-    expect($zero->isNegative())->toBeFalse();
+    $positive = MonetaryAmount::of('10.00');
 
-    expect($negative->isNegativeOrZero())->toBeTrue();
-    expect($zero->isNegativeOrZero())->toBeTrue();
-    expect($positive->isNegativeOrZero())->toBeFalse();
+    expect($positive)
+        ->isZero()->toBeFalse()
+        ->isNegative()->toBeFalse()
+        ->isNegativeOrZero()->toBeFalse()
+        ->isPositive()->toBeTrue()
+        ->isPositiveOrZero()->toBeTrue();
 
-    expect($positive->isPositive())->toBeTrue();
-    expect($negative->isPositive())->toBeFalse();
-    expect($zero->isPositive())->toBeFalse();
+    $negative = MonetaryAmount::of('-10.00');
 
-    expect($positive->isPositiveOrZero())->toBeTrue();
-    expect($zero->isPositiveOrZero())->toBeTrue();
-    expect($negative->isPositiveOrZero())->toBeFalse();
+    expect($negative)
+        ->isZero()->toBeFalse()
+        ->isNegative()->toBeTrue()
+        ->isNegativeOrZero()->toBeTrue()
+        ->isPositive()->toBeFalse()
+        ->isPositiveOrZero()->toBeFalse();
 });
 
 it('can convert to cents', function (mixed $amount, int $expected) {
