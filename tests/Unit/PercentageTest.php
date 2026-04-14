@@ -70,3 +70,13 @@ it('can get underlying value as string', function (string|float $number, string 
     'floats' => [0.002, '0.002%'],
     'large floats as strings' => ['1000000001.1000000001', '1000000001.1000000001%'],
 ]);
+
+it('correctly rounds in percentage output as string', function (string $number, int $decimals, string $result) {
+    expect(Percentage::of($number, decimals: $decimals)->toString())->toEqual($result);
+})->with([
+    ['100.1000', 0, '100%'],
+    ['100.1000', 1, '100.1%'],
+    ['100.1000', 2, '100.10%'],
+    ['100.1000', 3, '100.100%'],
+    ['100.1000', 4, '100.1000%'],
+]);
