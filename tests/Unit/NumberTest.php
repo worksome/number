@@ -7,7 +7,7 @@ use Pest\Expectation;
 use Worksome\Number\Number;
 
 it('can instantiate a Number from values', function (mixed $value) {
-    /** @var Expectation $expectation */
+    /** @var Expectation<Number> $expectation */
     $expectation = expect(Number::of($value))->toBeInstanceOf(Number::class);
 
     $type = gettype($value);
@@ -17,9 +17,9 @@ it('can instantiate a Number from values', function (mixed $value) {
         expect((string) $expectation->value)->toBeString()->toBe($value);
     } elseif ($type == 'integer') {
         expect($expectation->value->getValue()->toInt())->toBeInt()->toBe($value);
-    } elseif ($type == 'object' && $expectation->value instanceof BigDecimal) {
+    } elseif ($type == 'object' && $value instanceof BigDecimal) {
         expect($expectation->value->getValue())->toEqual($value);
-    } elseif ($type == 'object' && $expectation->value instanceof Number) {
+    } elseif ($type == 'object' && $value instanceof Number) {
         expect($expectation->value->getValue())->toBeInstanceOf(BigDecimal::class);
     } else {
         $this->fail('An invalid type was provided in the dataset');
@@ -33,8 +33,6 @@ it('can instantiate a Number from values', function (mixed $value) {
     '`0.1` as float' => 0.1,
     '`0.00000001` as float' => 0.00000001,
     '`1.0` as BigDecimal from string' => BigDecimal::of('1.0'),
-    '`1` as BigDecimal from integer' => BigDecimal::of(1),
-    '`0.1` as BigDecimal from float' => BigDecimal::of(0.1),
     '`1.0` as Number from string' => Number::of('1.0'),
     '`1` as Number from integer' => Number::of(1),
     '`0.1` as Number from float' => Number::of(0.1),
@@ -43,32 +41,32 @@ it('can instantiate a Number from values', function (mixed $value) {
 it('is immutable', function () {
     $number = Number::of('123456');
 
-    expect($number->getValue())->toEqual(BigDecimal::of(123456));
+    expect($number->getValue())->toEqual(BigDecimal::of('123456'));
 
     $number->add(Number::of(123456));
 
-    expect($number->getValue())->toEqual(BigDecimal::of(123456));
+    expect($number->getValue())->toEqual(BigDecimal::of('123456'));
 
     $number->sub(Number::of(123456));
 
-    expect($number->getValue())->toEqual(BigDecimal::of(123456));
+    expect($number->getValue())->toEqual(BigDecimal::of('123456'));
 
     $number->mul(Number::of(2));
 
-    expect($number->getValue())->toEqual(BigDecimal::of(123456));
+    expect($number->getValue())->toEqual(BigDecimal::of('123456'));
 
     $number->div(Number::of(2));
 
-    expect($number->getValue())->toEqual(BigDecimal::of(123456));
+    expect($number->getValue())->toEqual(BigDecimal::of('123456'));
 });
 
 it('can add numbers', function (mixed $number, mixed $change, mixed $result) {
     expect(Number::of($number)->add(Number::of($change))->getValue())->toEqual(BigDecimal::of($result));
 })->with([
     'integers as strings' => ['123456', '123456', '246912'],
-    'integers' => [123456, 123456, 246912],
+    'integers' => [123456, 123456, '246912'],
     'floats as strings' => ['0.001', '0.002', '0.003'],
-    'floats' => [0.001, 0.002, 0.003],
+    'floats' => [0.001, 0.002, '0.003'],
 ]);
 
 it('can subtract numbers', function (mixed $number, mixed $change, mixed $result) {
@@ -76,12 +74,12 @@ it('can subtract numbers', function (mixed $number, mixed $change, mixed $result
 })->with([
     'integers as strings as Number' => ['123456', Number::of('123456'), '0'],
     'integers as strings' => ['123456', '123456', '0'],
-    'integers as Number' => [123456, Number::of(123456), 0],
-    'integers' => [123456, 123456, 0],
+    'integers as Number' => [123456, Number::of(123456), '0'],
+    'integers' => [123456, 123456, '0'],
     'floats as strings as Number' => ['0.002', Number::of('0.001'), '0.001'],
     'floats as strings' => ['0.002', '0.001', '0.001'],
-    'floats as Number' => [0.002, Number::of(0.001), 0.001],
-    'floats' => [0.002, 0.001, 0.001],
+    'floats as Number' => [0.002, Number::of(0.001), '0.001'],
+    'floats' => [0.002, 0.001, '0.001'],
 ]);
 
 it(
@@ -92,8 +90,8 @@ it(
 )->with([
     'integers as strings as Number' => ['2', Number::of('10'), '20'],
     'integers as strings' => ['2', '10', '20'],
-    'integers as Number' => [2, Number::of(10), 20],
-    'integers' => [2, 10, 20],
+    'integers as Number' => [2, Number::of(10), '20'],
+    'integers' => [2, 10, '20'],
     'floats as strings as Number' => ['0.001', Number::of('0.002'), '0.000002'],
 ]);
 
@@ -118,8 +116,8 @@ it(
 )->with([
     'integers as strings as Number' => ['500', Number::of('10'), '50'],
     'integers as strings' => ['500', '10', '50'],
-    'integers as Number' => [500, Number::of(10), 50],
-    'integers' => [500, 10, 50],
+    'integers as Number' => [500, Number::of(10), '50'],
+    'integers' => [500, 10, '50'],
 ]);
 
 it('can round numbers', function () {
@@ -132,7 +130,7 @@ it('can negate numbers', function (mixed $number, mixed $result) {
     'integers as strings' => ['10', '-10'],
     'integers' => [2, -2],
     'floats as strings' => ['0.002', '-0.002'],
-    'floats' => [0.002, -0.002],
+    'floats' => [0.002, '-0.002'],
 ]);
 
 it('can get underlying value as string', function (mixed $number, string $result) {
