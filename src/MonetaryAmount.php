@@ -23,6 +23,11 @@ class MonetaryAmount extends Number
         }
     }
 
+    public static function fromCents(int $cents): static
+    {
+        return static::of($cents)->div('100');
+    }
+
     public function toCents(): int
     {
         return $this->mul('100')->getValue()->toInt();

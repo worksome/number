@@ -40,7 +40,7 @@ class NumberFromCents implements CastsAttributes
             return null;
         }
 
-        return ($this->class)::of($value)->div(100);
+        return ($this->class)::fromCents($value);
     }
 
     /** @param MonetaryAmount|null $value */
