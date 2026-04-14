@@ -6,24 +6,24 @@ namespace Worksome\Number\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Worksome\Number\Exceptions\ValueTypeMismatchException;
-use Worksome\Number\Number;
+use Worksome\Number\MonetaryAmount;
 
 /**
- * @template TClass of Number
+ * @template TClass of MonetaryAmount
  *
- * @implements CastsAttributes<Number, Number>
+ * @implements CastsAttributes<MonetaryAmount, MonetaryAmount>
  */
 class NumberFromCents implements CastsAttributes
 {
     /** @param class-string<TClass> $class */
     public function __construct(
-        private string $class = Number::class,
+        private string $class = MonetaryAmount::class,
     ) {
     }
 
-    /** @param class-string<Number> $class */
+    /** @param class-string<MonetaryAmount> $class */
     public static function using(
-        string $class = Number::class,
+        string $class = MonetaryAmount::class,
     ): string {
         // @phpstan-ignore argument.type
         return static::class . ':' . implode(',', array_map(fn ($value) => strval($value), func_get_args()));
@@ -43,7 +43,7 @@ class NumberFromCents implements CastsAttributes
         return ($this->class)::of($value)->div(100);
     }
 
-    /** @param Number|null $value */
+    /** @param MonetaryAmount|null $value */
     public function set($model, string $key, $value, array $attributes)
     {
         if ($value === null) {
@@ -56,7 +56,6 @@ class NumberFromCents implements CastsAttributes
             );
         }
 
-        // @phpstan-ignore method.deprecated (This class will be changed to only support subclasses of `MonetaryAmount`)
-        return $value->inCents();
+        return $value->toCents();
     }
 }

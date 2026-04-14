@@ -11,9 +11,8 @@ use Worksome\Number\Casts\NumberFromCents;
 use Worksome\Number\Exceptions\ValueTypeMismatchException;
 use Worksome\Number\MonetaryAmount;
 use Worksome\Number\Number;
-use Worksome\Number\Percentage;
 
-/** @property Number $value */
+/** @property MonetaryAmount $value */
 class TestMoneyAsCents extends Model
 {
     public $table = 'test_money';
@@ -25,9 +24,8 @@ class TestMoneyAsCents extends Model
     public function casts(): array
     {
         return [
-            'value_number' => NumberFromCents::class,
+            'value_default' => NumberFromCents::class,
             'value_monetary_amount' => NumberFromCents::using(MonetaryAmount::class),
-            'value_percentage' => NumberFromCents::using(Percentage::class),
         ];
     }
 
@@ -53,9 +51,8 @@ beforeEach(function () {
 
 it('casts to the correct class', function (string $key) {
     $class = match ($key) {
-        'value_number' => Number::class,
+        'value_default' => MonetaryAmount::class,
         'value_monetary_amount' => MonetaryAmount::class,
-        'value_percentage' => Percentage::class,
     };
 
     $money = TestMoneyAsCents::create([
@@ -66,28 +63,26 @@ it('casts to the correct class', function (string $key) {
 })->with('test keys');
 
 it('throws if input is not correct class', function () {
-    $this->expectException(ValueTypeMismatchException::class);
-
     TestMoneyAsCents::create([
         'value_monetary_amount' => Number::of(8125.00),
     ]);
-});
+})->throws(ValueTypeMismatchException::class);
 
-it('can cast from cents to a number', function () {
+it('can cast from cents to a monetary amount', function () {
     $money = TestMoneyAsCents::create([
-        'value_number' => Number::of(8125.00),
+        'value_default' => MonetaryAmount::of(8125.00),
     ]);
 
-    expect($money->value_number)
-        ->toBeInstanceOf(Number::class)
-        ->toEqual(Number::of(8125));
+    expect($money->value_default)
+        ->toBeInstanceOf(MonetaryAmount::class)
+        ->toEqual(MonetaryAmount::of(8125));
 });
 
 it('throws an exception for non-number values', function () {
     TestMoneyAsCents::create([
-        'value_number' => 12345,
+        'value_default' => 12345,
     ]);
-})->throws(ValueTypeMismatchException::class, 'The given cents value is not a Number instance');
+})->throws(ValueTypeMismatchException::class, 'The given cents value is not a MonetaryAmount instance');
 
 it('configures the correct bindings for decimals', function ($value, int $binding) {
     $bindings = [];
@@ -97,7 +92,7 @@ it('configures the correct bindings for decimals', function ($value, int $bindin
     });
 
     TestMoneyAsCents::create([
-        'value_number' => Number::of($value),
+        'value_default' => MonetaryAmount::of($value),
     ]);
 
     $this->assertSame([$binding], $bindings);
@@ -113,9 +108,9 @@ it('configures the correct bindings for decimals', function ($value, int $bindin
 
 it('supports null values', function () {
     $money = TestMoneyAsCents::create([
-        'value_number' => Number::of(123),
+        'value_default' => MonetaryAmount::of(123),
     ]);
-    $money->value_number = null;
+    $money->value_default = null;
 
-    expect($money->value_number)->toBeNull();
+    expect($money->value_default)->toBeNull();
 });
