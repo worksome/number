@@ -7,6 +7,7 @@ namespace Worksome\Number;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
+use Deprecated;
 
 class Number
 {
@@ -200,6 +201,10 @@ class Number
         return $this->value->toFloat();
     }
 
+    #[Deprecated(
+        message: 'Use `MonetaryAmount::toCents()` instead. This will be removed in 4.x.',
+        since: '3.6.0'
+    )]
     public function inCents(): int
     {
         return $this->mul('100')->getValue()->toInt();

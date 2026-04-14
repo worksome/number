@@ -137,7 +137,7 @@ it('can check sign of monetary amounts', function () {
 });
 
 it('can convert to cents', function (mixed $amount, int $expected) {
-    expect(MonetaryAmount::of($amount)->inCents())->toBe($expected);
+    expect(MonetaryAmount::of($amount)->toCents())->toBe($expected);
 })->with([
     '1.00 is 100 cents' => ['1.00', 100],
     '10.50 is 1050 cents' => ['10.50', 1050],
