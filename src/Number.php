@@ -173,12 +173,16 @@ class Number
         return $this->value->isPositiveOrZero();
     }
 
-    /** @param iterable<static> $values */
+    /** @param iterable<static|null> $values */
     public static function sum(iterable $values): static
     {
         $sum = static::of('0');
 
         foreach ($values as $value) {
+            if ($value === null) {
+                continue;
+            }
+
             $sum = $sum->add($value);
         }
 

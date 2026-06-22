@@ -293,3 +293,13 @@ it('can get sum of numbers', function () {
 
     expect($sum)->toEqual(Number::of('3'));
 });
+
+it('skips null values when using sum', function () {
+    $sum = Number::sum([
+        Number::of('1'),
+        null,
+        null,
+    ]);
+
+    expect($sum)->toEqual(Number::of('1'));
+});
