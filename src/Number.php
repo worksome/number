@@ -209,7 +209,7 @@ class Number
      */
     public function getCurrentDecimalCount(): int
     {
-        $parts = explode('.', $this->toString());
+        $parts = explode('.', (string) $this->roundToConfiguredDecimals($this)->value);
 
         // If there's no decimal part or only one part (no decimal point)
         if (count($parts) === 1 || empty($parts[1])) {

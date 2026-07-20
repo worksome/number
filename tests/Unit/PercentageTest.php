@@ -80,3 +80,13 @@ it('correctly rounds in percentage output as string', function (string $number, 
     ['100.1000', 3, '100.100%'],
     ['100.1000', 4, '100.1000%'],
 ]);
+
+it('does not count the percentage sign in the current decimal count', function (string $number, int $result) {
+    expect(Percentage::of($number)->getCurrentDecimalCount())->toBe($result);
+})->with([
+    'no decimals' => ['100', 0],
+    'trailing zeros only' => ['100.00', 0],
+    'single decimal' => ['12.5', 1],
+    'trailing zero after decimal' => ['12.50', 1],
+    'multiple decimals' => ['0.002', 3],
+]);
