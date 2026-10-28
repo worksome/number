@@ -22,8 +22,6 @@ final class PercentageType extends ScalarType
     /**
      * @param string|int|float $value
      *
-     * @return float
-     *
      * @throws Error
      */
     public function serialize($value): float

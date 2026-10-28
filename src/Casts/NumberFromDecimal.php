@@ -17,8 +17,8 @@ class NumberFromDecimal implements CastsAttributes
 {
     /** @param class-string<TClass> $class */
     public function __construct(
-        private int $decimals = 2,
-        private string $class = Number::class,
+        private readonly int $decimals = 2,
+        private readonly string $class = Number::class,
     ) {
     }
 
