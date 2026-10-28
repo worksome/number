@@ -25,8 +25,8 @@
         "larastan/larastan": "^3.9",
         "nunomaduro/collision": "^8.9",
         "nuwave/lighthouse": "^6.65",
-        "orchestra/testbench": "^11.0",
-        "pestphp/pest": "^4.4",
+        "orchestra/testbench": "^11.3",
+        "pestphp/pest": "^5.3",
         "worksome/coding-style": "^6.0"
     },
     "autoload": {
