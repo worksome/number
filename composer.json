@@ -21,12 +21,13 @@
         "webonyx/graphql-php": "^15.30"
     },
     "require-dev": {
+        "canvural/larastan-strict-rules": "^3.0",
         "larastan/larastan": "^3.9",
         "nunomaduro/collision": "^8.9",
         "nuwave/lighthouse": "^6.65",
-        "orchestra/testbench": "^10.9|^11.0",
+        "orchestra/testbench": "^11.0",
         "pestphp/pest": "^4.4",
-        "worksome/coding-style": "^4.0"
+        "worksome/coding-style": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -67,7 +68,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "worksome/coding-style": true
+            "worksome/coding-style": true,
+            "phpstan/extension-installer": true
         }
     },
     "minimum-stability": "dev",

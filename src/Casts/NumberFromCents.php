@@ -17,7 +17,7 @@ class NumberFromCents implements CastsAttributes
 {
     /** @param class-string<TClass> $class */
     public function __construct(
-        private string $class = MonetaryAmount::class,
+        private readonly string $class = MonetaryAmount::class,
     ) {
     }
 
