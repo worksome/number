@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "brick/math": "^0.14.4",
+        "brick/math": "^1.0",
         "webonyx/graphql-php": "^15.30"
     },
     "require-dev": {

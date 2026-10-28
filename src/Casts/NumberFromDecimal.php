@@ -15,14 +15,20 @@ use Worksome\Number\Number;
  */
 class NumberFromDecimal implements CastsAttributes
 {
-    /** @param class-string<TClass> $class */
+    /**
+     * @param non-negative-int     $decimals
+     * @param class-string<TClass> $class
+     */
     public function __construct(
         private readonly int $decimals = 2,
         private readonly string $class = Number::class,
     ) {
     }
 
-    /** @param class-string<Number> $class */
+    /**
+     * @param non-negative-int     $decimals
+     * @param class-string<Number> $class
+     */
     public static function using(
         int $decimals = 2,
         string $class = Number::class,
