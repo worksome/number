@@ -10,10 +10,12 @@ use Brick\Math\RoundingMode;
 
 class Number
 {
+    /** @var non-negative-int|null */
     protected int|null $decimals = null;
 
     protected RoundingMode $roundingMode = RoundingMode::HalfUp;
 
+    /** @param non-negative-int|null $decimals */
     final protected function __construct(
         protected BigDecimal $value,
         int|null $decimals = null,
@@ -25,6 +27,7 @@ class Number
         $this->validate();
     }
 
+    /** @param non-negative-int|null $decimals */
     public static function of(string|int|float|BigNumber|Number $value, int|null $decimals = null): static
     {
         if ($value instanceof BigNumber) {
@@ -82,6 +85,7 @@ class Number
         return $this->newInstanceWithValue($result);
     }
 
+    /** @param non-negative-int $scale */
     public function round(int $scale): static
     {
         return static::of($this->value->toScale($scale, $this->roundingMode), $this->decimals);
